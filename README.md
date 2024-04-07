@@ -1,1 +1,1 @@
-# hackaton-us-emotion
+# Emotek.pl
