@@ -19,7 +19,7 @@
     }
   ],
   "hosting": {
-    "public": "public",
+    "public": "emotek/build",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -59,8 +59,6 @@
     },
     "singleProjectMode": true
   },
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
-  },
+  "remoteconfig": {},
   "extensions": {}
 }
