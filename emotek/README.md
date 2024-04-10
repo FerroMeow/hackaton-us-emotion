@@ -1,3 +1,23 @@
+# Emotek.pl
+
+## Firebase emulator
+
+Na samym początku trzeba w folderze projektu firebase uruchomić emulatory `firebase emulators:start`
+
+## Dev server
+
+Przed rozpoczęciem kodowania należy wpisać `npm run dev`, co uruchomi stronę w przeglądarce
+
+## Buildowanie finalnej wersji
+
+Na początku należy sprawdzić błędy projektu przez `npm run check` lub `npm check watch`
+
+Następnie `npm run build` stworzy statyczne strony w `/emotek/build`
+
+## Deployowanie
+
+Za pomocą Firebase CLI można po buildzie deployować na chmurę Firebase
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
