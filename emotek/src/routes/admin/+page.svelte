@@ -4,7 +4,8 @@
 	import type { Age, ImageCategory, Resource } from '$lib/types/collections/Resource';
 	import type { Emotion } from '$lib/types/Emotion';
 	import type { Sex } from '$lib/types/collections/subtypes/Sex';
-	import { setDoc, doc } from 'firebase/firestore';
+	import { doc } from 'firebase/firestore';
+	import { setDocInc } from '$lib/firebase/db';
 	export let data: LayoutData;
 
 	const storage = data['storage'];
@@ -36,8 +37,8 @@
 						imageCategory: category,
 						emotions: selectedEmotions,
 						URL: url
-					};
-					await setDoc(doc(db, 'resource', name), resource);
+					} satisfies Resource;
+					await setDocInc(doc(db, 'resource', name), resource, 'resourceId');
 				});
 			});
 		}
