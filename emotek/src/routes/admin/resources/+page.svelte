@@ -7,6 +7,7 @@
 	import { doc } from 'firebase/firestore';
 	import { setDocInc } from '$lib/firebase/db';
 	import Input from '$lib/Input.svelte';
+	import Button from '$lib/Button.svelte';
 	export let data: PageData;
 
 	const emotionOptions = [
@@ -22,13 +23,12 @@
 	const storage = data['storage'];
 	const db = data['db'];
 
-	let files: any;
+	let files: FileList = [];
 	let age: Age;
 	let sex: Sex;
 	let category: ImageCategory;
 	let selectedEmotions: Emotion[] = [];
-	$: console.log(selectedEmotions);
-	let isValid = false;
+	$: isValid = files && selectedEmotions.length > 0 && files.length > 0;
 	async function upload() {
 		for (let i = 0; i < files.length; i++) {
 			let file = files[i];
@@ -67,17 +67,12 @@
 		}
 		return true;
 	}
-
-	async function isFormValid() {
-		console.log(files);
-		isValid = files && selectedEmotions.length > 0 && files.length > 0;
-	}
 </script>
 
 <h1 class="text-4xl">Dodawanie zdjęć emocji</h1>
 <form class="container mx-auto grid grid-cols-2">
+	<p class="m-4 text-xl">Wybierz emocje</p>
 	<div class="col-span-2 flex flex-wrap gap-4">
-		<p>Wybierz emocje:</p>
 		{#each emotionOptions as emotion}
 			<input
 				id="emotions-{emotion.value}"
@@ -95,28 +90,42 @@
 			</label>
 		{/each}
 	</div>
-	<div class="grid grid-cols-1 grid-rows-1 self-stretch justify-self-stretch shadow-sm">
-		<p class="col-[1_/_2] row-[1_/_2]">
+	<div class="col-span-2 grid h-96 grid-cols-2 justify-self-stretch shadow-sm">
+		<p class="col-[1_/_3] row-[1_/_2]">
 			<input
 				type="file"
 				id="images"
 				multiple
 				bind:files
-				on:change={isFormValid}
 				accept=".jpg, .jpeg, .png"
 				class="invisible"
 			/>
 		</p>
-		<p class="col-[1_/_2] row-[1_/_2]">
+		<p class="relative col-[1_/_3] row-[1_/_2]">
 			<label
 				for="images"
-				class="text-pomp_and_power-300 block flex h-full cursor-pointer items-center justify-center text-xl"
+				class="text-pomp_and_power-300 flex h-full w-full cursor-pointer items-center justify-center text-xl"
 			>
-				<span> Wybierz zdjęcia </span>
+				{#if !files.length}
+					<p class="text-pistachio-300 -tranlate-y-1/2 absolute top-1/2 w-full text-center">
+						<span> Wybierz zdjęcia </span>
+					</p>
+				{:else}
+					{#each files as file}
+						{@const imageUrl = URL.createObjectURL(file)}
+						<div>
+							<img
+								src={imageUrl}
+								on:load|once={() => URL.revokeObjectURL(imageUrl)}
+								alt={file.name}
+								class="max-h-96"
+							/>
+						</div>
+					{/each}
+				{/if}
 			</label>
 		</p>
 	</div>
-	<div class="h-80 self-center justify-self-center"></div>
 	<div>
 		<p>
 			<label for="age">Wiek osoby na zdjeciu</label>
@@ -170,10 +179,12 @@
 	{/if}
 	<br />
 
-	{#if !isValid}
-		<p style="color: red;">Wybierz przynajmniej jedną emocję i jedno zdjęcie.</p>
-		<button type="submit" disabled>Dodaj zdjęcia</button>
-	{:else}
-		<button type="submit" on:click={upload}>Dodaj zdjęcia</button>
-	{/if}
+	<div class="my-4">
+		{#if !isValid}
+			<p style="color: red;">Wybierz przynajmniej jedną emocję i jedno zdjęcie.</p>
+			<Button type="submit" disabled>Dodaj zdjęcia</Button>
+		{:else}
+			<Button type="submit" on:click={upload}>Dodaj zdjęcia</Button>
+		{/if}
+	</div>
 </form>
