@@ -9,7 +9,7 @@
 
 	const sideLinks: NavLink[] = [
 		{
-			link: 'resources',
+			link: 'resource',
 			name: 'Zasoby'
 		}
 	];

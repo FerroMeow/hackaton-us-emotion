@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData } from '../$types';
 	import { ref, getDownloadURL, uploadBytes, type UploadMetadata } from 'firebase/storage';
 	import type { Age, ImageCategory, Resource } from '$lib/types/collections/Resource';
 	import type { Emotion } from '$lib/types/Emotion';
@@ -8,6 +8,7 @@
 	import { setDocInc } from '$lib/firebase/db';
 	import Input from '$lib/Input.svelte';
 	import Button from '$lib/Button.svelte';
+	import { goto } from '$app/navigation';
 	export let data: PageData;
 
 	const emotionOptions = [
@@ -51,6 +52,9 @@
 						URL: url
 					} satisfies Resource;
 					await setDocInc(doc(db, 'resource', name), resource, 'resourceId');
+					goto('/admin/resource', {
+						replaceState: true
+					});
 				});
 			});
 		}
