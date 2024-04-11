@@ -129,7 +129,7 @@
 		</form>
 		<div class="my-8 h-[1px] bg-gray-900"></div>
 		<h2 class="text-2xl">Zaloguj się</h2>
-		<form id="login" class="grid grid-cols-2 gap-4" method="post">
+		<form id="login" class="grid grid-cols-2 gap-4">
 			<Input id="mail" type="email" bind:value={login_mail} required>Adres email</Input>
 			<Input id="password" type="password" bind:value={login_pass} required>Hasło</Input>
 			<Button on:click={login}>Zaloguj się</Button>

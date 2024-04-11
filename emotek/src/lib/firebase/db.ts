@@ -1,11 +1,19 @@
+import type { Emotion } from '$lib/types/Emotion';
 import {
+	Firestore,
+	collection,
 	doc,
 	getDoc,
+	getDocs,
+	query,
 	setDoc,
+	limit,
 	type DocumentData,
 	type DocumentReference,
-	type WithFieldValue
+	type WithFieldValue,
+	where
 } from 'firebase/firestore';
+import type { Resource } from '$lib/types/collections/Resource';
 
 export async function setDocInc<AppModelType, DbModelType extends DocumentData>(
 	reference: DocumentReference<AppModelType, DbModelType>,
@@ -32,4 +40,21 @@ export async function setDocInc<AppModelType, DbModelType extends DocumentData>(
 		value: currentValue + 1
 	});
 	console.log(`Updated increment val`);
+}
+
+export async function getImages(db: Firestore, emotions: Emotion[], count: number) {
+	let results = [];
+	for (const emotion of emotions) {
+		let tmp = await getEmotionImages(db, emotion, count);
+		results.push(tmp);
+	}
+	return results.flat();
+}
+
+async function getEmotionImages(db: Firestore, emotion: Emotion, count: number) {
+	const col_ref = collection(db, 'resource');
+	const results = await getDocs(query(col_ref, where('emotions', 'array-contains', emotion)));
+	let res = results.docs.map((result) => result.data());
+	res.sort((index) => 0.5 - Math.random());
+	return res.slice(0, count);
 }
