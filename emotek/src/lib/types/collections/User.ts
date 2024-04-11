@@ -17,6 +17,8 @@ export const numberIntoPlaceOfResidence = (population: number): PlaceOfResidence
 
 export type User = {
 	userId: number;
+	birthYear: number;
 	sex: Sex;
 	placeOfResidence: PlaceOfResidence;
+	additionalInformation: string;
 };

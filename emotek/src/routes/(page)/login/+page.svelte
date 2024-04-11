@@ -5,10 +5,11 @@
 		signInWithEmailAndPassword,
 		signOut
 	} from 'firebase/auth';
-	import type { LayoutData } from './$types';
+	import type { PageData } from './$types';
 	import { applyAction } from '$app/forms';
+	import { goto } from '$app/navigation';
 
-	export let data: LayoutData;
+	export let data: PageData;
 
 	const { app, auth } = data;
 
@@ -18,20 +19,22 @@
 	let login_mail: string;
 	let login_pass: string;
 
-	function register() {
-		createUserWithEmailAndPassword(auth, user_email, user_password);
+	async function register() {
+		const credentials = await createUserWithEmailAndPassword(auth, user_email, user_password);
+		goto('/', {
+			replaceState: true
+		});
 	}
-	function login() {
-		signInWithEmailAndPassword(auth, login_mail, login_pass);
+	async function login() {
+		const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
+		const idToken = await credentials.user.getIdTokenResult();
+		goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
+			replaceState: true
+		});
 	}
 	function logout() {
 		signOut(auth);
 	}
-	onAuthStateChanged(auth, (cred) => {
-		if (cred) {
-			console.log(cred);
-		}
-	});
 </script>
 
 <h1>Logowanie do emotek</h1>
