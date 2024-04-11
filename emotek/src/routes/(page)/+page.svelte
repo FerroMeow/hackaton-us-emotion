@@ -1,4 +1,7 @@
-<div class="h-[100vh]"></div>
-<h1 class="bg-red-400">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<a href="/subpage/">linky</a>
+<script>
+	import Carousel from '$lib/Carousel.svelte';
+</script>
+
+<Carousel>
+	<h2 slot="title">Karuzela</h2>
+</Carousel>
