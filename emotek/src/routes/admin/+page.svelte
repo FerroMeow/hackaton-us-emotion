@@ -2,7 +2,7 @@
 	import { onAuthStateChanged } from 'firebase/auth';
 	import type { LayoutData } from './$types';
 	import { redirect } from '@sveltejs/kit';
-	import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage';
+	import { ref, getDownloadURL, uploadBytes, type UploadMetadata } from 'firebase/storage';
 	import { v4 as uuidv4 } from 'uuid';
 	export let data: LayoutData;
 
@@ -13,40 +13,24 @@
 	let age: string;
 	let category: string;
 	let emotions: string[];
-
 	async function upload() {
-		if (files) {
-			const img_ref = ref(storage, 'example.jpg');
-			let test = undefined;
-			let meta = {
-				ContentType: 'image.jpeg'
-			};
-			let task = uploadBytesResumable(img_ref, files);
-			task.on(
-				'state_changed',
-				(snapshot) => {
-					console.log(snapshot);
-					const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-					console.log('progress: ' + progress);
-				},
-				(error) => {
-					console.log('error');
-				},
-				() => {
-					console.log('done');
-					//getting the url to saved picture(and setting img src to that url)
-					getDownloadURL(task.snapshot.ref).then((URL) => {
-						console.log(URL);
-						src = URL;
-					});
-				}
-			);
+		console.log(files);
+		console.log(files.length);
+		for (let i = 0; i < files.length; i++) {
+			let file = files[i];
+			const img_ref = ref(storage, Date.now() + file.name);
+			uploadBytes(img_ref, file).then((snapshot) => {
+				console.log(1);
+				getDownloadURL(img_ref).then((url) => {
+					console.log(url);
+				});
+			});
 		}
 	}
 </script>
 
 <form>
-	<input type="file" bind:value={files} on:change={upload} />
+	<input type="file" multiple bind:files on:change={upload} />
 </form>
 
 panel admina
