@@ -1,36 +1,43 @@
 <script lang="ts">
-	import { onAuthStateChanged } from 'firebase/auth';
 	import type { LayoutData } from './$types';
-	import { redirect } from '@sveltejs/kit';
 	import { ref, getDownloadURL, uploadBytes, type UploadMetadata } from 'firebase/storage';
-	import { v4 as uuidv4 } from 'uuid';
-	import type { Resource } from '$lib/types/collections/Resource';
+	import type { Age, ImageCategory, Resource } from '$lib/types/collections/Resource';
+	import type { Emotion } from '$lib/types/Emotion';
+	import type { Sex } from '$lib/types/collections/subtypes/Sex';
+	import { setDoc, doc } from 'firebase/firestore';
 	export let data: LayoutData;
 
 	const storage = data['storage'];
+	const db = data['db'];
 
 	let files: any;
-	let type: string;
-	let age: string;
-	let category: string;
-	let emotions: string[];
-	let selectedEmotions = [];
+	let age: Age;
+	let sex: Sex;
+	let category: ImageCategory;
+	let selectedEmotions: Emotion[] = [];
 	let isValid = false;
 	async function upload() {
 		for (let i = 0; i < files.length; i++) {
 			let file = files[i];
-
+			let resource: Resource;
 			if (file.type != 'image/jpeg' && file.type != 'image/png') {
 				continue;
 			}
-			const img_ref = ref(storage, Date.now() + file.name);
+			const name = Date.now() + file.name;
+			const img_ref = ref(storage, name);
 			uploadBytes(img_ref, file).then((snapshot) => {
-				getDownloadURL(img_ref).then((url) => {
+				getDownloadURL(img_ref).then(async (url) => {
 					console.log(url);
-					let resource: Resource = {
+					resource = {
 						resourceId: 1,
-						type: 'image'
+						type: 'image',
+						sex: sex,
+						age: age,
+						imageCategory: category,
+						emotions: selectedEmotions,
+						URL: url
 					};
+					await setDoc(doc(db, 'resource', name), resource);
 				});
 			});
 		}
@@ -51,17 +58,6 @@
 	async function isFormValid() {
 		console.log(files);
 		isValid = files && selectedEmotions.length > 0 && files.length > 0;
-	}
-
-	function handleSubmit() {
-		if (!isValid) {
-			alert('Wybierz przynajmniej jedną emocję i jedno zdjęcie.');
-			return;
-		}
-		const formData = {
-			emotions: selectedEmotions,
-			images: files
-		};
 	}
 </script>
 
@@ -96,6 +92,18 @@
 		<option value="middle-aged adults">Osoba w wieku średnim</option>
 		<option value="old-aged adults">Senior</option>
 	</select>
+	<br />
+	<label for="sex">Płeć osoby na zdjeciu</label>
+	<select id="sex" bind:value={sex}>
+		<option value="male">Mężczyzna</option>
+		<option value="female">Kobieta</option>
+		<option value="intersex">Osoba interpłciowa</option>
+	</select>
+	<label for="category">Typ zdjęcia</label>
+	<select id="category" bind:value={category}>
+		<option value="face">Zdjęcie twarzy</option>
+		<option value="fullbody">Zdjęcie ciała</option>
+	</select>
 	{#if files && files.length > 0 && !isValidImage()}
 		<p style="color: red;">Błędny format plików. Obsługiwane formaty plików JPG lub PNG.</p>
 	{/if}
@@ -105,6 +113,6 @@
 		<p style="color: red;">Wybierz przynajmniej jedną emocję i jedno zdjęcie.</p>
 		<button type="submit" disabled>Dodaj zdjęcia</button>
 	{:else}
-		<button type="submit" on:click={handleSubmit}>Dodaj zdjęcia</button>
+		<button type="submit" on:click={upload}>Dodaj zdjęcia</button>
 	{/if}
 </form>
