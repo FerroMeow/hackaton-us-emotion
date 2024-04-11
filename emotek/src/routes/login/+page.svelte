@@ -1,38 +1,59 @@
 <script lang="ts">
-	import { initializeApp } from 'firebase/app';
 	import {
-		getAuth,
-		connectAuthEmulator,
 		createUserWithEmailAndPassword,
+		signInWithEmailAndPassword,
+		signOut,
 		onAuthStateChanged
 	} from 'firebase/auth';
-	import firebaseConfig from '$lib/env';
 
-	const app = initializeApp(firebaseConfig);
-	const auth = getAuth(app);
-	connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+	import { initializeApp } from 'firebase/app';
+	import { connectAuthEmulator, getAuth } from 'firebase/auth';
+	import firebaseConfig from '$lib/env';
+	export const _app = initializeApp(firebaseConfig);
+	export const _auth = getAuth(_app);
+
+	connectAuthEmulator(_auth, 'http://127.0.0.1:9099');
+	import type { User } from '$lib/types/user';
 
 	let user_email: string;
 	let user_password: string;
 	let user_name: string;
+	let login_mail: string;
+	let login_pass: string;
+	let user: User | null;
 
 	function register() {
-		createUserWithEmailAndPassword(auth, user_email, user_password);
+		createUserWithEmailAndPassword(_auth, user_email, user_password);
 	}
-
-	onAuthStateChanged(auth, (user) => {
-		if (user) {
-		} else {
+	function login() {
+		signInWithEmailAndPassword(_auth, login_mail, login_pass);
+	}
+	function logout() {
+		signOut(_auth);
+	}
+	onAuthStateChanged(_auth, (cred) => {
+		if (cred) {
+			console.log(cred);
+			user = {
+				email: cred.email,
+				display_name: cred.displayName
+			};
 		}
 	});
 </script>
+
+{#if user != null}
+	<p>user: {user.display_name} {user.email}</p>
+{:else}
+	<p>not logged in</p>
+{/if}
 
 <h1>Logowanie do emotek</h1>
 <h2>Zarejestruj się</h2>
 <form id="register">
 	<label for="login">Nazwa użytkownika</label>
 	<input type="text" bind:value={user_name} id="login" required />
-	<label for="mail" pattern=".+@example\.com">Adres email</label>
+	<label for="mail">Adres email</label>
 	<input type="email" bind:value={user_email} id="mail" required />
 	<label for="password">hasło</label>
 	<input type="text" bind:value={user_password} id="password" required />
@@ -47,6 +68,7 @@
 	<select id="por" required>
 		<option value="village">Wieś</option>
 		<option value="small city">Małe miasto</option>
+		<option value="medium city">Średnie miasto</option>
 		<option value="big city">Duże miasto</option>
 	</select>
 	<button on:click={register} type="submit" id="register_button">Zarejestruj się</button>
@@ -54,8 +76,9 @@
 <h2>Zaloguj się</h2>
 <form id="login">
 	<label for="mail">Adres email</label>
-	<input type="email" required pattern=".+@example\.com" id="mail" />
+	<input bind:value={login_mail} type="email" required id="mail" />
 	<label for="password">hasło</label>
-	<input type="text" required id="password" />
-	<button type="submit" id="login_button">Zaloguj się</button>
+	<input bind:value={login_pass} type="text" required id="password" />
+	<button on:click={login} type="submit" id="login_button">Zaloguj się</button>
 </form>
+<input type="button" value="logout" on:click={logout} />
