@@ -15,7 +15,6 @@ export const load: LayoutData = async (data) => {
         console.log('b')
     }
     else if(a==null) {
-        throw redirect(301,'/login') 
         console.log('a')
     }
     
