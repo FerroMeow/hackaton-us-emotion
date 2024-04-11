@@ -18,6 +18,9 @@
 		console.log(files.length);
 		for (let i = 0; i < files.length; i++) {
 			let file = files[i];
+			if (file.type != 'image/jpeg' && file.type != 'image/png') {
+				continue;
+			}
 			const img_ref = ref(storage, Date.now() + file.name);
 			uploadBytes(img_ref, file).then((snapshot) => {
 				console.log(1);
