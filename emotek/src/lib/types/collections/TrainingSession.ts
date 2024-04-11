@@ -6,4 +6,7 @@ export type TrainingSession = {
 	sessionId: number;
 	userId: User['userId'];
 	type: Type;
+	age: number;
+	startedAt: Date;
+	endedAt: Date;
 };
