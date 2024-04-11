@@ -10,10 +10,7 @@
 	let emotekLinksVar = emotekLinks;
 
 	onMount(async () => {
-		console.log('on mount');
 		const user = await getLoggedUser(data.auth);
-		console.log('user data');
-		console.log(user ? 'got user' : 'no got user');
 		emotekLinksVar.push(
 			user
 				? {
@@ -26,7 +23,6 @@
 					}
 		);
 		emotekLinksVar = emotekLinksVar;
-		console.log(emotekLinksVar);
 	});
 </script>
 

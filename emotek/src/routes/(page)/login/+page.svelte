@@ -28,7 +28,6 @@
 	async function login() {
 		const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
 		const idToken = await credentials.user.getIdTokenResult();
-		console.log(idToken.claims);
 		goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
 			replaceState: true
 		});

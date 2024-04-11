@@ -13,9 +13,7 @@
 
 	onMount(async () => {
 		const user = await getLoggedUser(auth);
-		console.log(user);
 		if (user === null) {
-			console.log('redirecting');
 			goto('/login/', {
 				replaceState: true
 			});
