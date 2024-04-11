@@ -5,10 +5,10 @@
 		signInWithEmailAndPassword,
 		signOut
 	} from 'firebase/auth';
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 	import { applyAction } from '$app/forms';
 
-	export let data: PageData;
+	export let data: LayoutData;
 
 	const { app, auth } = data;
 
