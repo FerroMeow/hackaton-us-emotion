@@ -1,52 +1,38 @@
 <script lang="ts">
 	import {
 		createUserWithEmailAndPassword,
+		onAuthStateChanged,
 		signInWithEmailAndPassword,
-		signOut,
-		onAuthStateChanged
+		signOut
 	} from 'firebase/auth';
+	import type { PageData } from './$types';
+	import { applyAction } from '$app/forms';
 
-	import { initializeApp } from 'firebase/app';
-	import { connectAuthEmulator, getAuth } from 'firebase/auth';
-	import firebaseConfig from '$lib/env';
-	export const _app = initializeApp(firebaseConfig);
-	export const _auth = getAuth(_app);
+	export let data: PageData;
 
-	connectAuthEmulator(_auth, 'http://127.0.0.1:9099');
-	import type { User } from '$lib/types/user';
+	const { app, auth } = data;
 
 	let user_email: string;
 	let user_password: string;
 	let user_name: string;
 	let login_mail: string;
 	let login_pass: string;
-	let user: User | null;
 
 	function register() {
-		createUserWithEmailAndPassword(_auth, user_email, user_password);
+		createUserWithEmailAndPassword(auth, user_email, user_password);
 	}
 	function login() {
-		signInWithEmailAndPassword(_auth, login_mail, login_pass);
+		signInWithEmailAndPassword(auth, login_mail, login_pass);
 	}
 	function logout() {
-		signOut(_auth);
+		signOut(auth);
 	}
-	onAuthStateChanged(_auth, (cred) => {
+	onAuthStateChanged(auth, (cred) => {
 		if (cred) {
 			console.log(cred);
-			user = {
-				email: cred.email,
-				display_name: cred.displayName
-			};
 		}
 	});
 </script>
-
-{#if user != null}
-	<p>user: {user.display_name} {user.email}</p>
-{:else}
-	<p>not logged in</p>
-{/if}
 
 <h1>Logowanie do emotek</h1>
 <h2>Zarejestruj się</h2>
