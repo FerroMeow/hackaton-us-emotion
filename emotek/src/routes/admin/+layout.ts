@@ -5,17 +5,13 @@ import type { LayoutData } from './$types';
 import { onAuthStateChanged } from 'firebase/auth';
 
 export const load: LayoutData = async (data) => {
-	const {app, auth} = await data.parent();
-    const a =  await new Promise(
-        (resolver) => {
-            onAuthStateChanged(auth, (cred) => resolver(cred))
-        }
-    );
-    if(a) {
-        console.log('b')
-    }
-    else if(a==null) {
-        console.log('a')
-    }
-    
+	const { app, auth } = await data.parent();
+	const a = await new Promise((resolver) => {
+		onAuthStateChanged(auth, (cred) => resolver(cred));
+	});
+	if (a) {
+		console.log('b');
+	} else if (a == null) {
+		console.log('a');
+	}
 };
