@@ -1,16 +1,11 @@
 <script lang="ts">
-	import { initializeApp } from 'firebase/app';
-	import {
-		getAuth,
-		connectAuthEmulator,
-		createUserWithEmailAndPassword,
-		onAuthStateChanged
-	} from 'firebase/auth';
-	import firebaseConfig from '$lib/env';
+	import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+	import type { PageData } from './$types';
+	import { applyAction } from '$app/forms';
 
-	const app = initializeApp(firebaseConfig);
-	const auth = getAuth(app);
-	connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+	export let data: PageData;
+
+	const { app, auth } = data;
 
 	let user_email: string;
 	let user_password: string;
@@ -54,7 +49,7 @@
 <h2>Zaloguj się</h2>
 <form id="login">
 	<label for="mail">Adres email</label>
-	<input type="email" required pattern=".+@example\.com" id="mail" />
+	<input type="email" required id="mail" />
 	<label for="password">hasło</label>
 	<input type="text" required id="password" />
 	<button type="submit" id="login_button">Zaloguj się</button>
