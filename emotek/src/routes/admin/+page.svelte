@@ -2,9 +2,34 @@
 	import { onAuthStateChanged } from 'firebase/auth';
 	import type { LayoutData } from './$types';
 	import { redirect } from '@sveltejs/kit';
+	import { ref, getDownloadURL, uploadBytes, type UploadMetadata } from 'firebase/storage';
+	import { v4 as uuidv4 } from 'uuid';
 	export let data: LayoutData;
-	const { app, auth } = data;
-	let user: boolean;
+
+	const storage = data['storage'];
+
+	let files: any;
+	let type: string;
+	let age: string;
+	let category: string;
+	let emotions: string[];
+	async function upload() {
+		console.log(files);
+		console.log(files.length);
+		for (let i = 0; i < files.length; i++) {
+			let file = files[i];
+			if (file.type != 'image/jpeg' && file.type != 'image/png') {
+				continue;
+			}
+			const img_ref = ref(storage, Date.now() + file.name);
+			uploadBytes(img_ref, file).then((snapshot) => {
+				console.log(1);
+				getDownloadURL(img_ref).then((url) => {
+					console.log(url);
+				});
+			});
+		}
+	}
 
 	let selectedEmotions = [];
 	let selectedImages = [];
@@ -36,6 +61,14 @@
 		selectedImages = [];
 	}
 </script>
+
+<form>
+	<input type="file" multiple bind:files on:change={upload} />
+</form>
+
+<form>
+	<input type="file" multiple bind:files on:change={upload} />
+</form>
 
 <h2>Dodawanie zdjęć emocji</h2>
 <form on:submit | preventDefault={handleSubmit}>

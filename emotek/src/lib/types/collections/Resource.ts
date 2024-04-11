@@ -1,4 +1,5 @@
 import type { Sex } from './subtypes/Sex';
+import type { Emotion } from '../Emotion';
 
 export type ResourceType = 'image' | 'video' | 'text' | 'audio' | 'other';
 export type Age = 'child' | 'young adults' | 'middle-aged adults' | 'old-aged adults';
@@ -11,6 +12,8 @@ export type Resource =
 			age?: Age;
 			sex?: Sex;
 			imageCategory?: ImageCategory;
+			emotions: Emotion[];
+			URL: string;
 	  }
 	| {
 			resourceId: number;
@@ -18,4 +21,6 @@ export type Resource =
 			age?: Age;
 			sex?: Sex;
 			imageCategory: ImageCategory;
+			emotions: Emotion[];
+			URL: string;
 	  };

@@ -1,5 +1,4 @@
-export type user = {
-    "email":string,
-    "display_name":string
-    ""
+export type User = {
+	email: string;
+	display_name: string;
 };
