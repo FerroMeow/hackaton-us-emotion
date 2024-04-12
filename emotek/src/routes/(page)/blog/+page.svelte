@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import cat from '$lib/istockphoto-483799085-2048x2048.webp';
 
 	export let data: PageData;
 
@@ -12,6 +13,9 @@
 		{#await postPromise then posts}
 			{#if posts.empty}
 				<p class="text-5xl font-thin">Jeszcze nie jesteśmy gotowi mówić o emojach! 🫣</p>
+				<p class="mt-8">
+					<img src={cat} alt="" />
+				</p>
 			{:else}
 				{#each posts.docs as post}
 					{@const postData = post.data()}
