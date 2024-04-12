@@ -74,6 +74,7 @@
 	let login_pass: string;
 
 	let registerError = '';
+	let loginError = '';
 
 	async function register() {
 		try {
@@ -117,11 +118,16 @@
 		}
 	}
 	async function login() {
-		const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
-		const idToken = await credentials.user.getIdTokenResult();
-		goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
-			replaceState: true
-		});
+		try {
+			const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
+			const idToken = await credentials.user.getIdTokenResult();
+			goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
+				replaceState: true
+			});
+		} catch (error) {
+			loginError = 'Logowanie nie powiodło się';
+			return;
+		}
 	}
 </script>
 
@@ -159,7 +165,7 @@
 		<div class="bg-pomp_and_power-300 w-1"></div>
 		<div>
 			<h2 class="text-3xl">Zaloguj się</h2>
-
+			<p class="text-redwood-300 text-xl font-bold">{loginError}</p>
 			<form
 				id="login"
 				class="grid grid-cols-2 gap-4"

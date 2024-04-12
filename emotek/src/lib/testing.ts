@@ -3,7 +3,8 @@ import { getUserInfo, getImages } from './firebase/db';
 import type { TrainingSessionResult } from './types/collections/TrainingSessionResult';
 import type { TrainingSession } from './types/collections/TrainingSession';
 import { DocInc } from './firebase/db';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, setDoc, doc } from 'firebase/firestore';
+import { goto } from '$app/navigation';
 
 export async function startTest(
 	type: string,
@@ -77,7 +78,7 @@ export async function endTest(
 	const sessionId = await DocInc(db, 'sessionId');
 	console.log(sessionId);
 	trainingSession['sessionId'] = sessionId;
-	await addDoc(collection(db, 'training_session'), trainingSession);
+	await setDoc(doc(db, 'training_session', sessionId.toString()), trainingSession);
 	results = results.map((item) => {
 		return { ...item, sessionId: sessionId };
 	});
@@ -85,6 +86,7 @@ export async function endTest(
 		const resultId = await DocInc(db, 'resultId');
 		console.log(resultId);
 		results[i]['resultId'] = resultId;
-		await addDoc(collection(db, 'training_session_result'), results[i]);
+		await setDoc(doc(db, 'training_session_result', resultId.toString()), results[i]);
 	}
+	goto('/test/wyniki');
 }
