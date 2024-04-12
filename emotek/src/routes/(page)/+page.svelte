@@ -1,6 +1,6 @@
 <script>
-	import BorderSvg from '../../front-page/BorderSvg.svelte';
-	import Pane from '../../front-page/Pane.svelte';
+	import BorderSvg from '$ib/front-page/BorderSvg.svelte';
+	import Pane from '$ib/front-page/Pane.svelte';
 </script>
 
 <Pane accentColor={{ bg: 'bg-glaucous-600', text: 'text-black' }} title="Testy">
