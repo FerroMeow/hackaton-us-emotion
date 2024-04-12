@@ -10,7 +10,7 @@
 
 	const storage = data['storage'];
 	const db = data['db'];
-
+	const emotions = data['emotions'];
 	let files: any;
 	let age: Age;
 	let sex: Sex;
@@ -38,7 +38,7 @@
 						emotions: selectedEmotions,
 						URL: url
 					} satisfies Resource;
-					await setDocInc(doc(db, 'resource', name), resource, 'resourceId');
+					await setDocInc(doc(db, 'resource'), resource, 'resourceId');
 				});
 			});
 		}
@@ -66,13 +66,9 @@
 <form>
 	<label for="emotions">Wybierz emocje: </label>
 	<select id="emotions" multiple on:change={isFormValid} bind:value={selectedEmotions}>
-		<option value="anger">Złość</option>
-		<option value="contempt">Pogarda</option>
-		<option value="fear">Strach</option>
-		<option value="disgust">Obrzydzenie</option>
-		<option value="happiness">Szczęście</option>
-		<option value="sadness">Smutek</option>
-		<option value="surprise">Zaskoczenie</option>
+		{#each emotions as emotion}
+			<option value={emotion['eng']}>{emotion['pl']}</option>
+		{/each}
 	</select>
 
 	<br />

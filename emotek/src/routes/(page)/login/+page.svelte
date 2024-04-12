@@ -121,7 +121,7 @@
 			on:submit|preventDefault|stopPropagation={() => {}}
 		>
 			<Input id="mail" bind:value={user_email} required>Adres email</Input>
-			<Input id="mail" bind:value={user_password} required type="password">Hasło</Input>
+			<Input id="password" bind:value={user_password} required type="password">Hasło</Input>
 			<Input id="number" type="number" bind:value={currentUserModel.birthYear} required>
 				Data urodzenia
 			</Input>
@@ -138,9 +138,9 @@
 			id="login"
 			class="grid grid-cols-2 gap-4"
 			on:submit|preventDefault|stopPropagation={() => {}}
-
-			<Input id="mail" type="email" bind:value={login_mail} required>Adres email</Input>
-			<Input id="password" type="password" bind:value={login_pass} required>Hasło</Input>
+		>
+			<Input id="maill" type="email" bind:value={login_mail} required>Adres email</Input>
+			<Input id="passwordl" type="password" bind:value={login_pass} required>Hasło</Input>
 			<Button on:click={login}>Zaloguj się</Button>
 		</form>
 		<p>
