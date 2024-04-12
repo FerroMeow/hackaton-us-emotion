@@ -15,11 +15,11 @@
 			user
 				? {
 						link: '/user/',
-						name: 'Profil'
+						name: 'Profil 😇'
 					}
 				: {
 						link: '/login/',
-						name: 'Zaloguj się'
+						name: 'Zaloguj się 😍'
 					}
 		);
 		emotekLinksVar = emotekLinksVar;

@@ -3,7 +3,7 @@
 	import Pane from '$lib/front-page/Pane.svelte';
 </script>
 
-<Pane accentColor={{ bg: 'bg-glaucous-600', text: 'text-black' }} title="Testy">
+<Pane accentColor={{ bg: 'bg-glaucous-600', text: 'text-black' }} title="Testy 🧐">
 	<p>
 		Przeprowadź z nami testy <a href="/test/diagnoza/" class="text-pomp_and_power-300 underline"
 			>Diagnostyczne</a
@@ -16,7 +16,7 @@
 	</p>
 </Pane>
 <BorderSvg topFill="fill-glaucous-600" botBg="bg-ecru-500" />
-<Pane accentColor={{ bg: 'bg-ecru-500', text: 'text-black' }} title="O emocjach">
+<Pane accentColor={{ bg: 'bg-ecru-500', text: 'text-black' }} title="O emocjach 🎁">
 	<p>
 		Na stronie <a href="/emocje/" class="text- text-redwood-300 underline">o emocjach</a> dowiesz się
 		więcej na temat głównych emocji.
@@ -35,7 +35,7 @@
 	</p>
 </Pane>
 <BorderSvg topFill="fill-ecru-500" botBg="bg-pink_lavender-400" />
-<Pane accentColor={{ bg: 'bg-pink_lavender-400', text: 'text-black' }} title="Sprawdź nasz blog">
+<Pane accentColor={{ bg: 'bg-pink_lavender-400', text: 'text-black' }} title="Sprawdź nasz blog 👽">
 	<p>Na naszym blogu ciągle piszemy o nowych odkryciach w dziedzinie emocji i rozpoznawania ich.</p>
 	<p>
 		Dzięki naszym postom w końcu znajdziesz odpowiedź na <a
@@ -45,7 +45,10 @@
 	</p>
 </Pane>
 <BorderSvg topFill="fill-pink_lavender-400" botBg="bg-pistachio-400" />
-<Pane accentColor={{ bg: 'bg-pistachio-400', text: 'text-white' }} title="Udostępnij nas znajomym">
+<Pane
+	accentColor={{ bg: 'bg-pistachio-400', text: 'text-white' }}
+	title="Udostępnij nas znajomym 🏅"
+>
 	<p><a href="/">Emotek.pl</a> to strona edukacyjna.</p>
 	<p>
 		Polecając nas znajomym, nie tylko pomagasz im w zdobyciu emocjonalnej wiedzy, ale również

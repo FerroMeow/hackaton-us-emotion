@@ -7,7 +7,7 @@
 
 <div class="bg-pomp_and_power-400 py-8">
 	<div class="container mx-auto">
-		<h1 class="pb-12 text-center text-4xl">O emocjach</h1>
+		<h1 class="pb-12 text-center text-4xl">O emocjach 🤓</h1>
 		<div class="flex flex-wrap items-stretch gap-12">
 			{#each data.emotionData as emotion}
 				<EmotionCard {emotion}></EmotionCard>

@@ -17,7 +17,7 @@ type EmotionPageData = {
 
 const emotionData: EmotionPageData[] = [
 	{
-		name: 'Złość',
+		name: 'Złość 😠',
 		endpoint: 'zlosc',
 		description:
 			'Złość to emocja najczęściej utożsamiana z agresją. Ale czy to tylko tyle? Sprawdź!',
@@ -25,7 +25,7 @@ const emotionData: EmotionPageData[] = [
 		src: angerImg
 	},
 	{
-		name: 'Szczęście',
+		name: 'Szczęście 😋',
 		endpoint: 'szczescie',
 		description:
 			'Jedna z najbardziej miłych emocji, coś co wielu chce osiągnąć. Jednak nie jest to proste. Dzięki naszym informacjom możesz je osiągnąć!',
@@ -33,7 +33,7 @@ const emotionData: EmotionPageData[] = [
 		src: happinessImg
 	},
 	{
-		name: 'Smutek',
+		name: 'Smutek 😢',
 		endpoint: 'smutek',
 		description:
 			'Najbardziej niezrozumiana emocja. Kliknij aby dowiedzieć się czemu nie ma potrzeby jej unikania!',
@@ -41,7 +41,7 @@ const emotionData: EmotionPageData[] = [
 		src: sadnessImg
 	},
 	{
-		name: 'Zaskoczenie',
+		name: 'Zaskoczenie 😮',
 		endpoint: 'zaskoczenie',
 		description:
 			'Emocja mało popularna i przez wielu uważana za nieinteresującą. Nie jest to prawda, o czym piszemy na jej stronie!',
@@ -49,7 +49,7 @@ const emotionData: EmotionPageData[] = [
 		src: surpriseImg
 	},
 	{
-		name: 'Strach',
+		name: 'Strach 😱',
 		endpoint: 'strach',
 		description:
 			'Jedna z najsilniejszych emocji. Wiedza o niej pozwala zapanować nad jej efektami, czego możesz dokonać na jej stronie.',
@@ -57,14 +57,14 @@ const emotionData: EmotionPageData[] = [
 		src: fearImg
 	},
 	{
-		name: 'Pogarda',
+		name: 'Pogarda 😒',
 		endpoint: 'pogarda',
 		description: 'Interesująca w wielu aspektach emocja o której można mówić godzinami.',
 		bg: 'bg-gray-700',
 		src: contemptImg
 	},
 	{
-		name: 'Obrzydzenie',
+		name: 'Obrzydzenie 🤢',
 		endpoint: 'obrzydzenie',
 		description: 'Niech jej nazwa nie zniechęca cię do poznania jej dokładniej!',
 		bg: 'bg-pistachio-700',
