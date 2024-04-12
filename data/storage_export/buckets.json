@@ -2,6 +2,9 @@
   "buckets": [
     {
       "id": "test-85b39.appspot.com"
+    },
+    {
+      "id": "storageBucket"
     }
   ]
 }
