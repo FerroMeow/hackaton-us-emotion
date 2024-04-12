@@ -73,23 +73,48 @@
 	let login_mail: string;
 	let login_pass: string;
 
+	let registerError = '';
+
 	async function register() {
-		const credentials = await createUserWithEmailAndPassword(auth, user_email, user_password);
-		setDocInc(
-			doc(db, 'user', credentials.user.uid),
-			{
-				userId: 0,
-				sex: currentUserModel.sex,
-				birthYear: currentUserModel.birthYear,
-				additionalInformation: currentUserModel.additionalInformation,
-				placeOfResidence: currentUserModel.placeOfResidence
-			} satisfies User,
-			'userId'
-		);
-		const idToken = await credentials.user.getIdTokenResult();
-		goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
-			replaceState: true
-		});
+		try {
+			const credentials = await createUserWithEmailAndPassword(auth, user_email, user_password);
+			setDocInc(
+				doc(db, 'user', credentials.user.uid),
+				{
+					userId: 0,
+					sex: currentUserModel.sex,
+					birthYear: currentUserModel.birthYear,
+					additionalInformation: currentUserModel.additionalInformation,
+					placeOfResidence: currentUserModel.placeOfResidence
+				} satisfies User,
+				'userId'
+			);
+			const idToken = await credentials.user.getIdTokenResult();
+			goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
+				replaceState: true
+			});
+		} catch (error) {
+			switch (error?.code) {
+				case 'auth/invalid-email':
+					registerError = 'Niepoprawny Email';
+					break;
+				case 'auth/invalid-password':
+					registerError = 'Niepoprawne hasło';
+					break;
+				case 'auth/missing-password':
+					registerError = 'Brak hasła';
+					break;
+				case 'auth/missing-email':
+					registerError = 'Brak emaila';
+					break;
+				case 'auth/weak-password':
+					registerError = 'Hasło musi składać się z conajmniej 6 znaków';
+					break;
+			}
+			console.log(error);
+			console.log(error.code);
+			return;
+		}
 	}
 	async function login() {
 		const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
@@ -109,6 +134,7 @@
 	<div class="container mx-auto flex min-h-full justify-center gap-16">
 		<div>
 			<h2 class="text-3xl">Zarejestruj się</h2>
+			<p class="text-redwood-300 text-xl font-bold">{registerError}</p>
 			<form
 				id="register"
 				class="grid grid-cols-2 items-center gap-4"

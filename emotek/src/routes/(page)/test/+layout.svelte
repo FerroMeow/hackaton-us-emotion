@@ -42,7 +42,9 @@
 			<ul class="divide-pink_lavender-300 container mx-auto flex gap-4">
 				{#each testLinks as sideLink}
 					<li>
-						<a href={sideLink.link} class="text-pomp_and_power-300 text-2xl">{sideLink.name}</a>
+						<a href="/test/{sideLink.link}" class="text-pomp_and_power-300 text-2xl"
+							>{sideLink.name}</a
+						>
 					</li>
 				{/each}
 			</ul>
