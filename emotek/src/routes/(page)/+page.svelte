@@ -23,13 +23,13 @@
 	</p>
 	<p>
 		Dowiesz się o tym dlaczego nie każdy przejaw <a
-			href="/emocje/gniew"
+			href="/emocje/zlosc/"
 			class="text-redwood-300 underline">gniewu</a
 		> jest wyraźnie widoczny.
 	</p>
 	<p>
 		Przeczytasz o tym dlaczego ludzie czują <a
-			href="/emocje/obrzydzenie"
+			href="/emocje/obrzydzenie/"
 			class="text-redwood-200 underline">obrzydzenie</a
 		>.
 	</p>
