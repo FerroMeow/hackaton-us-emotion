@@ -18,7 +18,7 @@
 		<input
 			name={id}
 			{id}
-			class="bg-ecru-900 rounded-lg px-4 py-2 shadow-sm"
+			class="bg-ecru-900 invalid:text-redwood-300 invalid:bg-redwood-900 rounded-lg px-4 py-2 shadow-sm transition-all"
 			bind:value
 			{...$$restProps}
 		/>
