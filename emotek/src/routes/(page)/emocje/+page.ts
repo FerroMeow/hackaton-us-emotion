@@ -1,4 +1,11 @@
 import type { PageLoad } from './$types';
+import angerImg from '$lib/emotions/emotion-imgs/angry0.jpg';
+import surpriseImg from '$lib/emotions/emotion-imgs/sur0.jpg';
+import disgustImg from '$lib/emotions/emotion-imgs/disg0.jpg';
+import contemptImg from '$lib/emotions/emotion-imgs/cont0.jpg';
+import happinessImg from '$lib/emotions/emotion-imgs/happy0.jpg';
+import fearImg from '$lib/emotions/emotion-imgs/scared0.jpg';
+import sadnessImg from '$lib/emotions/emotion-imgs/sad0.jpg';
 
 type EmotionPageData = {
 	endpoint: string;
@@ -15,7 +22,7 @@ const emotionData: EmotionPageData[] = [
 		description:
 			'Złość to emocja najczęściej utożsamiana z agresją. Ale czy to tylko tyle? Sprawdź!',
 		bg: 'bg-redwood-700',
-		src: null
+		src: angerImg
 	},
 	{
 		name: 'Szczęście',
@@ -23,7 +30,7 @@ const emotionData: EmotionPageData[] = [
 		description:
 			'Jedna z najbardziej miłych emocji, coś co wielu chce osiągnąć. Jednak nie jest to proste. Dzięki naszym informacjom możesz je osiągnąć!',
 		bg: 'bg-pink_lavender-700',
-		src: null
+		src: happinessImg
 	},
 	{
 		name: 'Smutek',
@@ -31,7 +38,7 @@ const emotionData: EmotionPageData[] = [
 		description:
 			'Najbardziej niezrozumiana emocja. Kliknij aby dowiedzieć się czemu nie ma potrzeby jej unikania!',
 		bg: 'bg-glaucous-700',
-		src: null
+		src: sadnessImg
 	},
 	{
 		name: 'Zaskoczenie',
@@ -39,7 +46,7 @@ const emotionData: EmotionPageData[] = [
 		description:
 			'Emocja mało popularna i przez wielu uważana za nieinteresującą. Nie jest to prawda, o czym piszemy na jej stronie!',
 		bg: 'bg-ecru-700',
-		src: null
+		src: surpriseImg
 	},
 	{
 		name: 'Strach',
@@ -47,21 +54,21 @@ const emotionData: EmotionPageData[] = [
 		description:
 			'Jedna z najsilniejszych emocji. Wiedza o niej pozwala zapanować nad jej efektami, czego możesz dokonać na jej stronie.',
 		bg: 'bg-pomp_and_power-700',
-		src: null
+		src: fearImg
 	},
 	{
 		name: 'Pogarda',
 		endpoint: 'pogarda',
 		description: 'Interesująca w wielu aspektach emocja o której można mówić godzinami.',
 		bg: 'bg-gray-700',
-		src: null
+		src: contemptImg
 	},
 	{
 		name: 'Obrzydzenie',
 		endpoint: 'obrzydzenie',
 		description: 'Niech jej nazwa nie zniechęca cię do poznania jej dokładniej!',
 		bg: 'bg-pistachio-700',
-		src: null
+		src: disgustImg
 	}
 ];
 

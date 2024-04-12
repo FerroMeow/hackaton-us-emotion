@@ -5,10 +5,10 @@
 	export let data: PageData;
 </script>
 
-<div class="py-8">
+<div class="bg-pomp_and_power-400 py-8">
 	<div class="container mx-auto">
 		<h1 class="pb-12 text-center text-4xl">O emocjach</h1>
-		<div class="flex flex-wrap gap-12">
+		<div class="flex flex-wrap items-stretch gap-12">
 			{#each data.emotionData as emotion}
 				<EmotionCard {emotion}></EmotionCard>
 			{/each}
@@ -16,8 +16,8 @@
 	</div>
 </div>
 
-<div class="bg-pomp_and_power-400 py-8">
-	<div class="container mx-auto text-white [&>p+p]:mt-4">
+<div class="bg-glaucous-600 py-8">
+	<div class="container mx-auto [&>p+p]:mt-4">
 		<h1 class="py-8 pb-12 text-center text-4xl">Lorem Ipsum</h1>
 
 		<p>
