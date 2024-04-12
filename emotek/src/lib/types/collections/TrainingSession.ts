@@ -1,11 +1,11 @@
 import type { User } from './User';
 
-export type Type = '';
+//export type Type = 'diagnosis' | 'training';
 
 export type TrainingSession = {
 	sessionId: number;
 	userId: User['userId'];
-	type: Type;
+	type: string;
 	age: number;
 	startedAt: Date;
 	endedAt: Date;

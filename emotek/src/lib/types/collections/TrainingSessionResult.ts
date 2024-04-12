@@ -5,7 +5,7 @@ export type TrainingSessionResult = {
 	resultId: number;
 	sessionId: TrainingSession['userId'];
 	resourceId: Resource['resourceId'];
-	recognizedEmotions: string;
+	recognizedEmotions: string[];
 	startedAt: Date;
 	endedAt: Date;
 };
