@@ -108,11 +108,7 @@
 
 <div>
 	<div class="container mx-auto">
-		<h1>Logowanie do emotek</h1>
-	</div>
-</div>
-<div>
-	<div class="container mx-auto">
+		<h1 class="pt-8 text-4xl">Logowanie do Emotek.pl</h1>
 		<div class="my-8 h-[1px] bg-gray-900"></div>
 		<h2 class="text-2xl">Zarejestruj się</h2>
 		<form
