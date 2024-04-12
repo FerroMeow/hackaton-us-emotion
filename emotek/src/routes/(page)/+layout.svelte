@@ -36,3 +36,7 @@
 		<slot />
 	</div>
 </div>
+
+<footer class="bg-black py-2 text-right text-white">
+	<p>&copy; Piotr Sołtysik, Oliwia Gonta, Konrad Balcerzak {new Date().getFullYear()}</p>
+</footer>
