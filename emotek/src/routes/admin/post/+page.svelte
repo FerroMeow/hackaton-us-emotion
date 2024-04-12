@@ -3,6 +3,7 @@
 	import { type QueryDocumentSnapshot } from 'firebase/firestore';
 	import type { PageData } from './$types';
 	import { deletePost, getPosts } from '$lib/firebase/blog';
+	import { fade } from 'svelte/transition';
 
 	export let data: PageData;
 
@@ -25,7 +26,7 @@
 		{@const postData = post.data()}
 		{@const jsonVal = console.log(JSON.stringify(postData))}
 
-		<article>
+		<article in:fade out:fade>
 			<h3 class="text-xl">
 				<a href="/blog/{post.id}">
 					{postData.title}
@@ -33,7 +34,7 @@
 			</h3>
 			<p class="text-pomp_and_power-500 text-sm">{postData.date.toDate()?.toLocaleString()}</p>
 		</article>
-		<div class="mt-4">
+		<div class="mt-4" in:fade out:fade>
 			<Button
 				class="bg-redwood-400 rounded-lg px-4 py-2 text-white"
 				on:click={(event) => deleteCurrentPost(post)}>Usuń</Button

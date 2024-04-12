@@ -11,6 +11,7 @@
 		query,
 		runTransaction
 	} from 'firebase/firestore';
+	import { fade } from 'svelte/transition';
 
 	export let data: PageData;
 
@@ -36,11 +37,11 @@
 
 <div class="divide-y divide-neutral-300">
 	{#await resourceDocsPromise}
-		<p class="text-4xl">Pobieranie zasobów...</p>
+		<p class="text-4xl" in:fade out:fade>Pobieranie zasobów...</p>
 	{:then resourceDocs}
 		{#each resourceDocs.docs as resourceDoc}
 			{@const docData = resourceDoc.data()}
-			<div class="bg-ecru-700 mx-auto w-min min-w-64 rounded-3xl p-6">
+			<div class="bg-ecru-700 mx-auto w-min min-w-64 rounded-3xl p-6" in:fade out:fade>
 				<figure>
 					<img src={docData.URL} alt="" />
 					<!-- {#await getDownloadURL(docData.URL) then fullUrl}
@@ -55,6 +56,6 @@
 			</div>
 		{/each}
 	{:catch}
-		<p class="text-4xl">Błąd pobierania zasobów!</p>
+		<p class="text-4xl" in:fade out:fade>Błąd pobierania zasobów!</p>
 	{/await}
 </div>

@@ -5,6 +5,7 @@
 	import type { TrainingSessionResult } from '$lib/types/collections/TrainingSessionResult';
 	import { startTest, nextImage, endTest } from '$lib/testing';
 	import Button from '$lib/Button.svelte';
+	import { fade } from 'svelte/transition';
 
 	export let data: layoutData;
 	const { emotions, db, auth } = data;
@@ -54,7 +55,7 @@
 	}
 </script>
 
-<div>
+<div in:fade out:fade>
 	<div class="container mx-auto">
 		<h2 class="pt-16 text-4xl">Ćwicz rozpoznawanie emocji</h2>
 		<p class="mt-4 text-xl">

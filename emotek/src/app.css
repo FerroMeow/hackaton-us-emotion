@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	a {
+		transition: all 0.1s;
+	}
+	a:hover,
+	a:focus-visible {
+		filter: brightness(0.8);
+	}
+}

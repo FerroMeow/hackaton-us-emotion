@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { fade } from 'svelte/transition';
 </script>
 
-<div class="grid min-h-full grid-rows-[auto_1fr]">
+<div class="grid min-h-full grid-rows-[auto_1fr]" in:fade out:fade>
 	<div class="py-24 {$page.data.topBg} {$page.data.topText}">
 		<div class="container mx-auto">
 			<h1 class="text-4xl">{$page.data.emotionPageTitle}</h1>
