@@ -105,7 +105,7 @@
 			<h1 class="pb-8 text-4xl">Logowanie do Emotek.pl</h1>
 		</div>
 	</div>
-	<div class="container mx-auto flex min-h-full justify-between gap-16">
+	<div class="container mx-auto flex min-h-full justify-center gap-16">
 		<div>
 			<h2 class="text-3xl">Zarejestruj się</h2>
 			<form

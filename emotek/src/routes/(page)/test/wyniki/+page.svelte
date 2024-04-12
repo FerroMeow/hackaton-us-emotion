@@ -5,14 +5,19 @@
 	export let data: LayoutData;
 	const { db, emotions } = data;
 	let sessions;
+	const options_time = {
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric'
+	};
 	const colors = {
-		anger: 'red',
-		fear: 'purple',
-		happiness: 'orange',
-		surprise: 'yellow',
-		contempt: 'darkgray',
-		disgust: 'darkgreen',
-		sadness: 'darkblue'
+		anger: 'redwood-500',
+		fear: 'pomp_and_power-500',
+		happiness: 'pink_lavender-400',
+		surprise: 'ecru-400',
+		contempt: 'gray-500',
+		disgust: 'pistachio-500',
+		sadness: 'glaucous-600'
 	};
 	onMount(async () => {
 		sessions = await getUserResults(
@@ -20,41 +25,54 @@
 			1,
 			emotions.map((el) => el['eng'])
 		);
-		sessions.forEach((session) => {
-			emotions
-				.map((el) => el['eng'])
-				.forEach((emotion) => {
-					if (session.results[emotion]['total'] == 0) {
-						let avg = 0;
-					} else {
-						let avg = session.results[emotion]['correct'] / session.results[emotion]['total'];
-					}
-				});
-		});
+		console.log(sessions);
 	});
 </script>
 
 {#if sessions}
-	{#each sessions as session}
-		<div>
-			<p>sesja id: {session.sessionId}</p>
-			{#each emotions as emotion}
-				<div
-					class="bg-gray flex h-2 w-full overflow-hidden rounded-full"
-					style="--var:{(session.results[emotion['eng']]['correct'] /
-						session.results[emotion['eng']]['total']) *
-						100 +
-						'%'}	"
-				>
-					<div
-						class="flex flex-col justify-center overflow-hidden whitespace-nowrap rounded-full"
-						style="width: var(--var); background-color:red;"
-					></div>
+	<span class="text-redwood-500 text-pistachio-500 text-pink_lavender-400 text-ecru-400"></span>
+	<div class="">
+		{#each sessions as session}
+			<div
+				class={'container mx-auto my-[2%] w-[50%]  border-2 border-solid p-[2%] ' +
+					(session.type == 'diagnosis' ? 'border-t-8	 border-t-indigo-600' : '')}
+			>
+				<p class="text-center">
+					{session['type'] == 'diagnosis' ? 'diagnoza' : 'ćwiczenie'}
+					{session.sessionId}
+				</p>
+				<div class=" w-100 flex flex-row justify-around text-center">
+					<div class="w-[25%]">
+						Czas rozpoczęcia {session['startedAt']
+							.toDate()
+							.toLocaleString(Date.UTC(), options_time)}
+					</div>
+					<div class="w-[25%]">
+						Czas zakończenia {session['endedAt'].toDate().toLocaleString(Date.UTC(), options_time)}
+					</div>
 				</div>
-				{emotion['pl']}:{session.results[emotion['eng']]['correct'] /
-					session.results[emotion['eng']]['total']}<br />
-			{/each}
-		</div>
-	{/each}
+				{#each emotions as emotion}
+					{@const aaa =
+						session.results[emotion['eng']]['total'] != 0
+							? Math.round(
+									session.results[emotion['eng']]['correct'] /
+										session.results[emotion['eng']]['total']
+								) * 100
+							: 0}
+					<p class={'text-' + colors[emotion['eng']] + ' text-center'}>
+						{emotion['pl']}:{aaa}%
+					</p>
+					<div class="mx-auto h-2 w-[100%] bg-gray-300">
+						<div
+							class={'bg-' +
+								colors[emotion['eng']] +
+								' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
+							style:width={`${aaa}%`}
+						></div>
+					</div>
+				{/each}
+			</div>
+		{/each}
+	</div>
 {/if}
 <p>Wyniki twojego testu:</p>
