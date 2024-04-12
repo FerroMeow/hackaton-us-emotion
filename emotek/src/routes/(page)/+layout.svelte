@@ -26,7 +26,9 @@
 	});
 </script>
 
-<div class="min-h-[100vh]">
+<div class="grid min-h-[100vh] grid-rows-[auto_1fr]">
 	<Navbar navLinks={emotekLinksVar}></Navbar>
-	<slot />
+	<div>
+		<slot />
+	</div>
 </div>
