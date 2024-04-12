@@ -1,0 +1,19 @@
+{
+  "name": "1712893906838sad1.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1712893906855,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "8cd6ba70-42b1-409f-b0e4-3cc6f887e58c"
+  ],
+  "etag": "n3f+2XAAcLucWCkIlrPYyQRyVz0",
+  "customMetadata": {},
+  "timeCreated": "2024-04-12T03:51:46.855Z",
+  "updated": "2024-04-12T03:51:46.855Z",
+  "size": 414857,
+  "md5Hash": "T1FStJZ8+V1wlrihi8AlYw==",
+  "crc32c": "3084537214"
+}

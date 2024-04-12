@@ -1,0 +1,19 @@
+{
+  "name": "1712893889719happy2.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1712893889755,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "9cc06433-3b51-43f5-ad9c-989a6be81eed"
+  ],
+  "etag": "7q7c1AxiM9dDRan/A1GWqg6Qj1g",
+  "customMetadata": {},
+  "timeCreated": "2024-04-12T03:51:29.755Z",
+  "updated": "2024-04-12T03:51:29.755Z",
+  "size": 86371,
+  "md5Hash": "1TnGlfPozU+A9ReTU+B1Jg==",
+  "crc32c": "4113002672"
+}

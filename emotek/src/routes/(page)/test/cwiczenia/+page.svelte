@@ -7,12 +7,12 @@
 	import { onMount } from 'svelte';
 	export let data: LayoutData;
 	const { db, auth, emotions } = data;
-	emotions.map((el) => el['eng']);
-	let selectedEmotion: any;
+	let selectedEmotion: string[] = [];
 	let trainingSession: TrainingSession | undefined;
 	let images: any[];
 	let results: TrainingSessionResult[] = [];
 	let image;
+	let image_per_emotion = 1;
 
 	async function next() {
 		//TODO test if working
@@ -29,9 +29,9 @@
 		const user = await getLoggedUser(auth);
 		if (user) {
 			let { trainingSession_res, images_res } = await startTest(
-				'diagnosis',
+				'exercise',
 				emotions.map((el) => el['eng']),
-				10,
+				image_per_emotion,
 				user.uid,
 				db
 			);
@@ -49,15 +49,10 @@
 		<img id="image" src={image ? image.URL : ''} alt="Zdjęcie do zdiagnozowania emocji" />
 		<div id="emotionSelector">
 			<label for="emotion">Wybierz emocję: </label>
-			<select id="emotion" bind:value={selectedEmotion}>
-				<option value="">Wybierz emocję: </option>
-				<option value="anger">Złość</option>
-				<option value="contempt">Pogarda</option>
-				<option value="fear">Strach</option>
-				<option value="disgust">Obrzydzenie</option>
-				<option value="happiness">Szczęście</option>
-				<option value="sadness">Smutek</option>
-				<option value="surprise">Zaskoczenie</option>
+			<select id="emotion" multiple bind:value={selectedEmotion}>
+				{#each emotions as emotion}
+					<option value={emotion['eng']}>{emotion['pl']}</option>
+				{/each}
 			</select>
 			<button on:click={next}>Następne</button>
 		</div>

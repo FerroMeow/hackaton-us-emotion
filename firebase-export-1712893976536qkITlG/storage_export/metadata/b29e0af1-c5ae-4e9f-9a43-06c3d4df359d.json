@@ -1,18 +1,18 @@
 {
-  "name": "1712865920325angry2.jpg",
+  "name": "1712893952166angry2.jpg",
   "bucket": "storageBucket",
   "metageneration": 1,
-  "generation": 1712865920341,
+  "generation": 1712893952182,
   "contentType": "image/jpeg",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
   "downloadTokens": [
-    "ab0b2975-7424-49da-8e3e-214e44ccb1b8"
+    "0f86bb3b-f7a8-4677-8f4b-7c97fb81b4dd"
   ],
-  "etag": "UzQMPbBNcXzsTo5F/pJZJ5JE0Co",
+  "etag": "HmgY1hUf4Lg6VsP7xRc8V5x8c30",
   "customMetadata": {},
-  "timeCreated": "2024-04-11T20:05:20.341Z",
-  "updated": "2024-04-11T20:05:20.341Z",
+  "timeCreated": "2024-04-12T03:52:32.182Z",
+  "updated": "2024-04-12T03:52:32.182Z",
   "size": 103417,
   "md5Hash": "/Fo70/KEacm9y2wUehWwDA==",
   "crc32c": "3524439778"

@@ -69,15 +69,15 @@
 	<div class="col-span-2 flex flex-wrap gap-4">
 		{#each data.emotions as emotion}
 			<input
-				id="emotions-{emotion.ang}"
-				value={emotion.ang}
+				id="emotions-{emotion.eng}"
+				value={emotion.eng}
 				type="checkbox"
 				name="checkbox"
 				bind:group={selectedEmotions}
 				class="[&:checked+label]:bg-pistachio-500 accent-pistachio-500"
 			/>
 			<label
-				for="emotions-{emotion.value}"
+				for="emotions-{emotion.eng}"
 				class="bg-pistachio-900 cursor-pointer rounded-xl px-6 py-2 shadow-md"
 			>
 				{emotion.pl}
