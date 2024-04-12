@@ -115,7 +115,7 @@
 						id="image"
 						src={image ? image.URL : ''}
 						alt="Zdjęcie do zdiagnozowania emocji"
-						class="h-96"
+						class="h-96 object-cover"
 						style="object-fit: cover;"
 					/>
 					<div id="result" style="display:none;"></div>

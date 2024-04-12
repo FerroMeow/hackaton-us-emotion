@@ -79,7 +79,16 @@
 				</p>
 			</div>
 			<div>
-				<img id="image" src={image ? image.URL : ''} alt="Zdjęcie do zdiagnozowania emocji" />
+				<div class="h-[50%] w-[50%]">
+					<img
+						id="image"
+						src={image ? image.URL : ''}
+						alt="Zdjęcie do zdiagnozowania emocji"
+						class="h-96 object-cover"
+						style="object-fit: cover;"
+					/>
+					<div id="result" style="display:none;"></div>
+				</div>
 				<div id="result" style="display:none;"></div>
 			</div>
 		</div>
