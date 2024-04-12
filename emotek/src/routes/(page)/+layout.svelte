@@ -6,11 +6,13 @@
 	import { getLoggedUser } from '$lib/firebase/auth';
 	import { fade } from 'svelte/transition';
 
+	import { navigating } from '$app/stores';
+
 	export let data: LayoutData;
 
 	let emotekLinksVar = emotekLinks;
 
-	onMount(async () => {
+	async function updateNav() {
 		const user = await getLoggedUser(data.auth);
 		emotekLinksVar = emotekLinks.concat(
 			user
@@ -28,7 +30,9 @@
 					]
 		);
 		emotekLinksVar = emotekLinksVar;
-	});
+	}
+
+	navigating.subscribe(updateNav);
 </script>
 
 <div in:fade out:fade>
