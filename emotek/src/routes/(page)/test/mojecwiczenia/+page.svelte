@@ -105,17 +105,21 @@
 								/>
 							</span>
 						{/each}
-						<select id="emotion" multiple bind:value={selectedEmotion}> </select>
 					</p>
 					<p>
 						<Button on:click={next}>Następne</Button>
 					</p>
 				</div>
-				<div>
-					<img id="image" src={image ? image.URL : ''} alt="Zdjęcie do zdiagnozowania emocji" />
+				<div class="h-[50%] w-[50%]">
+					<img
+						id="image"
+						src={image ? image.URL : ''}
+						alt="Zdjęcie do zdiagnozowania emocji"
+						class="h-96"
+						style="object-fit: cover;"
+					/>
 					<div id="result" style="display:none;"></div>
 				</div>
-				>>>>>>> a3e0e7b94c17ff1e47932fef0dc70fdef272dbf7
 			</div>
 		{/if}
 	</div>
