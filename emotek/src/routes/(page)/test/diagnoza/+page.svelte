@@ -12,6 +12,5 @@
 		<option value="sadness">Smutek</option>
 		<option value="surprise">Zaskoczenie</option>
 	</select>
-
-	<button onclick="nextImage()">Następne zdjęcie</button>
+	<button>Następne zdjęcie</button>
 </div>
