@@ -38,18 +38,16 @@
 {#if authenticated}
 	<div class="grid min-h-full grid-rows-[auto_1fr]">
 		<nav class="bg-glaucous-700 divide-pomp_and_power-300 px-6 py-4">
-			<h3 class="text-2xl">Testy</h3>
-			<ul class="divide-pink_lavender-300 flex gap-4">
+			<ul class="divide-pink_lavender-300 container mx-auto flex gap-4">
 				{#each testLinks as sideLink}
 					<li>
-						<a href={sideLink.link} class="text-pomp_and_power-300 text-xl">{sideLink.name}</a>
+						<a href={sideLink.link} class="text-pomp_and_power-300 text-2xl">{sideLink.name}</a>
 					</li>
 				{/each}
 			</ul>
 		</nav>
-		<div class="bg-pink_lavender-800 p-12">
+		<div class="bg-pink_lavender-800">
 			<slot />
 		</div>
 	</div>
-	<slot />
 {/if}
