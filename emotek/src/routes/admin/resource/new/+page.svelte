@@ -7,6 +7,7 @@
 	import { setDocInc } from '$lib/firebase/db';
 	import Button from '$lib/Button.svelte';
 	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 	export let data: PageData;
 
 	data.emotions;
@@ -68,20 +69,22 @@
 	<p class="m-4 text-xl">Wybierz emocje</p>
 	<div class="col-span-2 flex flex-wrap gap-4">
 		{#each data.emotions as emotion}
-			<input
-				id="emotions-{emotion.eng}"
-				value={emotion.eng}
-				type="checkbox"
-				name="checkbox"
-				bind:group={selectedEmotions}
-				class="[&:checked+label]:bg-pistachio-500 accent-pistachio-500"
-			/>
-			<label
-				for="emotions-{emotion.eng}"
-				class="bg-pistachio-900 cursor-pointer rounded-xl px-6 py-2 shadow-md"
-			>
-				{emotion.pl}
-			</label>
+			<div in:fade out:fade>
+				<input
+					id="emotions-{emotion.eng}"
+					value={emotion.eng}
+					type="checkbox"
+					name="checkbox"
+					bind:group={selectedEmotions}
+					class="[&:checked+label]:bg-pistachio-500 accent-pistachio-500"
+				/>
+				<label
+					for="emotions-{emotion.eng}"
+					class="bg-pistachio-900 cursor-pointer rounded-xl px-6 py-2 shadow-md"
+				>
+					{emotion.pl}
+				</label>
+			</div>
 		{/each}
 	</div>
 	<div class="col-span-2 grid h-96 grid-cols-2 justify-self-stretch shadow-sm">
@@ -101,13 +104,17 @@
 				class="text-pomp_and_power-300 flex h-full w-full cursor-pointer items-center justify-center text-xl"
 			>
 				{#if !files.length}
-					<p class="text-pistachio-300 -tranlate-y-1/2 absolute top-1/2 w-full text-center">
+					<p
+						class="text-pistachio-300 -tranlate-y-1/2 absolute top-1/2 w-full text-center"
+						in:fade
+						out:fade
+					>
 						<span> Wybierz zdjęcia </span>
 					</p>
 				{:else}
 					{#each files as file}
 						{@const imageUrl = URL.createObjectURL(file)}
-						<div>
+						<div in:fade out:fade>
 							<img
 								src={imageUrl}
 								on:load|once={() => URL.revokeObjectURL(imageUrl)}

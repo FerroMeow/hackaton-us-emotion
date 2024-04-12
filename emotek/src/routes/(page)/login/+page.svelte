@@ -14,6 +14,7 @@
 	import Input from '$lib/Input.svelte';
 	import Button from '$lib/Button.svelte';
 	import Select from '$lib/Select.svelte';
+	import { fade } from 'svelte/transition';
 
 	const sexOptions: {
 		name: string;
@@ -99,7 +100,7 @@
 	}
 </script>
 
-<div class="grid min-h-full grid-rows-[auto_1fr] py-16">
+<div class="grid min-h-full grid-rows-[auto_1fr] py-16" in:fade out:fade>
 	<div>
 		<div class="container mx-auto">
 			<h1 class="pb-8 text-4xl">Logowanie do Emotek.pl</h1>

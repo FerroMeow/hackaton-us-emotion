@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { getLoggedUser } from '$lib/firebase/auth';
 	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 
 	export let data: LayoutData;
 	const { auth } = data;
@@ -36,7 +37,7 @@
 </script>
 
 {#if authenticated}
-	<div class="grid min-h-screen grid-rows-[auto_1fr]">
+	<div class="grid min-h-screen grid-rows-[auto_1fr]" in:fade>
 		<Navbar navLinks={adminLinksParsedVar}></Navbar>
 
 		<div class="grid grid-cols-[auto_1fr]">

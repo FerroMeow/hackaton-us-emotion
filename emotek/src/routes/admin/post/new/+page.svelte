@@ -5,6 +5,7 @@
 	import type { PageData } from './$types';
 	import { setDocInc } from '$lib/firebase/db';
 	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 
 	export let data: PageData;
 
@@ -26,7 +27,7 @@
 
 <h1 class="text-4xl">Dodaj posta na blog</h1>
 
-<form on:submit|preventDefault|stopPropagation={() => {}}>
+<form on:submit|preventDefault|stopPropagation={() => {}} in:fade out:fade>
 	<Input id="title" bind:value={postModel.title}>Tytuł</Input>
 	<div>
 		<p><label for="content">Treść posta</label></p>
