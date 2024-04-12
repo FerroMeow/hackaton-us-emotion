@@ -15,10 +15,6 @@
 			user
 				? [
 						{
-							link: '/user/',
-							name: 'Profil 😇'
-						},
-						{
 							link: '/logout/',
 							name: 'Wyloguj się 🥶'
 						}
