@@ -73,7 +73,6 @@
 							/>
 						</span>
 					{/each}
-					<select id="emotion" multiple bind:value={selectedEmotion}> </select>
 				</p>
 				<p>
 					<Button on:click={next}>Następne</Button>
