@@ -11,6 +11,12 @@
 
 	let authenticated: boolean = false;
 
+	const adminLinksParsed = adminLinks.map((link) => {
+		return { ...link, link: `/admin/${link.link}` };
+	});
+
+	let adminLinksParsedVar = adminLinksParsed;
+
 	onMount(async () => {
 		const user = await getLoggedUser(auth);
 		if (user === null) {
@@ -18,6 +24,12 @@
 				replaceState: true
 			});
 		} else {
+			adminLinksParsedVar = adminLinksParsed.concat([
+				{
+					link: '/logout/',
+					name: 'Wyloguj się 🥶'
+				}
+			]);
 			authenticated = true;
 		}
 	});
@@ -25,21 +37,15 @@
 
 {#if authenticated}
 	<div class="grid min-h-screen grid-rows-[auto_1fr]">
-		<Navbar
-			navLinks={adminLinks.map((link) => {
-				return { ...link, link: `/admin/${link.link}` };
-			})}
-		></Navbar>
+		<Navbar navLinks={adminLinksParsedVar}></Navbar>
 
 		<div class="grid grid-cols-[auto_1fr]">
 			<nav class="bg-pistachio-700 divide-pomp_and_power-300 divide-y-2 divide-solid px-6 py-4">
 				<h3 class="text-lg">Panel Administracyjny</h3>
 				<ul class="divide-pomp_and_power-300 divide-y-2 divide-solid">
-					{#each adminLinks as sideLink}
+					{#each adminLinksParsedVar as sideLink}
 						<li>
-							<a href="/admin/{sideLink.link}" class="text-pomp_and_power-300 text-xl"
-								>{sideLink.name}</a
-							>
+							<a href={sideLink.link} class="text-pomp_and_power-300 text-xl">{sideLink.name}</a>
 						</li>
 					{/each}
 				</ul>

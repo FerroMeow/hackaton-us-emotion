@@ -11,16 +11,24 @@
 
 	onMount(async () => {
 		const user = await getLoggedUser(data.auth);
-		emotekLinksVar.push(
+		emotekLinksVar = emotekLinks.concat(
 			user
-				? {
-						link: '/user/',
-						name: 'Profil 😇'
-					}
-				: {
-						link: '/login/',
-						name: 'Zaloguj się 😍'
-					}
+				? [
+						{
+							link: '/user/',
+							name: 'Profil 😇'
+						},
+						{
+							link: '/logout/',
+							name: 'Wyloguj się 🥶'
+						}
+					]
+				: [
+						{
+							link: '/login/',
+							name: 'Zaloguj się 😍'
+						}
+					]
 		);
 		emotekLinksVar = emotekLinksVar;
 	});
