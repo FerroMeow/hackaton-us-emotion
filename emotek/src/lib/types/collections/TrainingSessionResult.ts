@@ -8,4 +8,5 @@ export type TrainingSessionResult = {
 	recognizedEmotions: string[];
 	startedAt: Date;
 	endedAt: Date;
+	answer: string[];
 };

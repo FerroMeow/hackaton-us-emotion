@@ -12,15 +12,21 @@
 	let images: any[];
 	let results: TrainingSessionResult[] = [];
 	let image;
-	let image_per_emotion = 1;
+	let image_per_emotion = 3;
+	let last_emotion: string[] = [];
 
 	async function next() {
 		//TODO test if working
-
-		let { image_res, images_res, results_res } = nextImage(images, results, selectedEmotion);
+		let { image_res, images_res, results_res, last_emotion_res } = nextImage(
+			images,
+			results,
+			selectedEmotion,
+			last_emotion
+		);
 		image = image_res;
 		images = images_res;
 		results = results_res;
+		last_emotion = last_emotion_res;
 		if (!image) {
 			await endTest(db, trainingSession, results);
 		}

@@ -37,29 +37,35 @@ export async function startTest(
 export function nextImage(
 	images_res: any[],
 	results_res: TrainingSessionResult[],
-	selectedEmotion: string[]
+	selectedEmotion: string[],
+	last_emotion: string[]
 ) {
 	const image_res = images_res.pop();
 	if (!image_res) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
+		results_res[results_res.length - 1]['answer'] = last_emotion;
 		return { image_res, images_res, results_res };
 	}
 	if (results_res.length > 0) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
+		results_res[results_res.length - 1]['answer'] = last_emotion;
 	}
-	console.log(selectedEmotion);
 	results_res.push({
 		resultId: -1,
 		sessionId: -1,
 		resourceId: image_res['resourceId'],
 		startedAt: new Date(),
 		endedAt: new Date(),
-		recognizedEmotions: []
+		recognizedEmotions: [],
+		answer: []
 	});
+	console.log(results_res);
 
-	return { image_res, images_res, results_res };
+	const last_emotion_res = image_res['emotions'];
+
+	return { image_res, images_res, results_res, last_emotion_res };
 }
 
 export async function endTest(

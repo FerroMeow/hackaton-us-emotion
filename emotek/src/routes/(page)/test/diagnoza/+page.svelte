@@ -13,6 +13,7 @@
 	let results: TrainingSessionResult[] = [];
 	let image;
 	const image_per_emotion = 10;
+	let last_emotion: string[] = [];
 
 	async function next() {
 		let { image_res, images_res, results_res } = nextImage(images, results, selectedEmotion);

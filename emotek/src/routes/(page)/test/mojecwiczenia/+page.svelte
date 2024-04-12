@@ -15,6 +15,7 @@
 	let images: any[];
 	let results: TrainingSessionResult[] = [];
 	let image;
+	let last_emotion: string[] = [];
 	async function beginTest() {
 		if (picCategories.length > 0) {
 			testStarted = true;
@@ -35,10 +36,17 @@
 		}
 	}
 	async function next() {
-		let { image_res, images_res, results_res } = nextImage(images, results, selectedEmotion);
+		//TODO test if working
+		let { image_res, images_res, results_res, last_emotion_res } = nextImage(
+			images,
+			results,
+			selectedEmotion,
+			last_emotion
+		);
 		image = image_res;
 		images = images_res;
 		results = results_res;
+		last_emotion = last_emotion_res;
 		if (!image) {
 			await endTest(db, trainingSession, results);
 		}
@@ -75,7 +83,7 @@
 			<img id="image" src={image ? image.URL : ''} alt="Zdjęcie do zdiagnozowania emocji" />
 			<div id="emotionSelector">
 				<label for="emotion">Wybierz emocję: </label>
-				<select id="emotion" bind:value={selectedEmotion}>
+				<select id="emotion" multiple bind:value={selectedEmotion}>
 					{#each emotions as emotion}
 						<option value={emotion['eng']}>{emotion['pl']}</option>
 					{/each}

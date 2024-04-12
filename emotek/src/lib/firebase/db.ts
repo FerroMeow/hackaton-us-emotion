@@ -13,6 +13,7 @@ import {
 	where,
 	orderBy
 } from 'firebase/firestore';
+import { stringify } from 'postcss';
 
 export async function setDocInc<AppModelType, DbModelType extends DocumentData>(
 	reference: DocumentReference<AppModelType, DbModelType>,
@@ -82,40 +83,28 @@ export async function getUserResults(db: Firestore, userId: number, emotions: st
 	let results;
 	results = await getDocs(query(col_ref, where('userId', '==', userId), orderBy('type', 'asc')));
 	let res = results.docs.map((result) => result.data());
-
+	//loop throogh sessions
 	for (let i = 0; i < res.length; i++) {
 		res[i]['results'] = [];
 		const results_docs = await getDocs(query(res_ref, where('sessionId', '==', res[i].sessionId)));
 		const results_data = results_docs.docs.map((result1) => result1.data());
-		let ii = 0;
-		let jj = 0;
 		res[i]['results'].push(results_data.flat());
+		//loop through emotions
 		emotions.forEach((emotion) => {
-			res[i][emotion] = {};
-			res[i][emotion]['total'] = 0;
-			res[i][emotion]['correct'] = 0;
-			res[i]['results'][0].forEach(async (answer) => {
-				console.log(answer);
-				const answer1 = await checkAnswer(db, answer['resourceId'], [emotion]);
-				const answer2 = await checkAnswer(db, answer['resourceId'], answer['recognizedEmotions']);
-
-				if (answer1) {
-					res[i][emotion]['total'] += 1;
-				}
-				if (answer2) {
-					res[i][emotion]['correct'] += 1;
-				}
-			});
+			res[i]['results'][emotion] = {};
+			res[i]['results'][emotion]['total'] = 0;
+			res[i]['results'][emotion]['correct'] = 0;
+		});
+		//loop through results
+		res[i]['results'][0].forEach((result_record) => {
+			res[i]['results'][result_record['answer']]['total'] += 1;
+			if (
+				JSON.stringify(result_record['answer']) ==
+				JSON.stringify(result_record['recognizedEmotions'])
+			) {
+				res[i]['results'][result_record['recognizedEmotions']]['correct'] += 1;
+			}
 		});
 	}
 	return res;
-}
-
-export async function checkAnswer(db: Firestore, resourceId: number, answer: string[]) {
-	const res_ref = collection(db, 'resource');
-	const res_result = await getDocs(
-		query(res_ref, and(where('resourceId', '==', resourceId), where('emotions', '==', answer)))
-	);
-	const results = res_result.docs.map((res) => res.data());
-	return results.length > 0;
 }
