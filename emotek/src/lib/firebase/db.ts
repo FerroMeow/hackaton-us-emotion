@@ -1,4 +1,3 @@
-import type { Emotion } from '$lib/types/Emotion';
 import {
 	Firestore,
 	collection,
@@ -7,13 +6,11 @@ import {
 	getDocs,
 	query,
 	setDoc,
-	limit,
 	type DocumentData,
 	type DocumentReference,
 	type WithFieldValue,
 	where
 } from 'firebase/firestore';
-import type { Resource } from '$lib/types/collections/Resource';
 
 export async function setDocInc<AppModelType, DbModelType extends DocumentData>(
 	reference: DocumentReference<AppModelType, DbModelType>,
@@ -46,27 +43,24 @@ export async function DocInc(db: Firestore, incrementField: string) {
 }
 
 export async function getEmotions(db: Firestore) {
-	let arr = [];
 	const col_ref = collection(db, 'emotions');
 	const results = await getDocs(query(col_ref));
-	results.docs.map((res) => arr.push(res.data()));
-	return arr;
+	return results.docs.map((res) => res.data());
 }
 
-export async function getImages(db: Firestore, emotions: Emotion[], count: number) {
-	let results = [];
+export async function getImages(db: Firestore, emotions: [], count: number) {
+	const results = [];
 	for (const emotion of emotions) {
-		let tmp = await getEmotionImages(db, emotion, count);
-		results.push(tmp);
+		results.push(await getEmotionImages(db, emotion, count));
 	}
 	return results.flat();
 }
 
-async function getEmotionImages(db: Firestore, emotion: Emotion, count: number) {
+async function getEmotionImages(db: Firestore, emotion: object, count: number) {
 	const col_ref = collection(db, 'resource');
 	const results = await getDocs(query(col_ref, where('emotions', 'array-contains', emotion)));
-	let res = results.docs.map((result) => result.data());
-	res.sort((index) => 0.5 - Math.random());
+	const res = results.docs.map((result) => result.data());
+	res.sort(() => 0.5 - Math.random());
 	return res.slice(0, count);
 }
 

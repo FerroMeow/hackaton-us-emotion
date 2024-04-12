@@ -2,24 +2,14 @@
 	import type { PageData } from '../$types';
 	import { ref, getDownloadURL, uploadBytes, type UploadMetadata } from 'firebase/storage';
 	import type { Age, ImageCategory, Resource } from '$lib/types/collections/Resource';
-	import type { Emotion } from '$lib/types/Emotion';
 	import type { Sex } from '$lib/types/collections/subtypes/Sex';
 	import { doc } from 'firebase/firestore';
 	import { setDocInc } from '$lib/firebase/db';
-	import Input from '$lib/Input.svelte';
 	import Button from '$lib/Button.svelte';
 	import { goto } from '$app/navigation';
 	export let data: PageData;
 
-	const emotionOptions = [
-		{ name: 'Złość', value: 'anger' },
-		{ name: 'Pogarda', value: 'contempt' },
-		{ name: 'Strach', value: 'fear' },
-		{ name: 'Obrzydzenie', value: 'disgust' },
-		{ name: 'Szczęście', value: 'happiness' },
-		{ name: 'Smutek', value: 'sadness' },
-		{ name: 'Zaskoczenie', value: 'surprise' }
-	];
+	data.emotions;
 
 	const storage = data['storage'];
 	const db = data['db'];
@@ -28,7 +18,7 @@
 	let age: Age;
 	let sex: Sex;
 	let category: ImageCategory;
-	let selectedEmotions: Emotion[] = [];
+	let selectedEmotions: any[] = [];
 	$: isValid = files && selectedEmotions.length > 0 && files.length > 0;
 	async function upload() {
 		for (let i = 0; i < files.length; i++) {
@@ -77,10 +67,10 @@
 <form class="container mx-auto grid grid-cols-2">
 	<p class="m-4 text-xl">Wybierz emocje</p>
 	<div class="col-span-2 flex flex-wrap gap-4">
-		{#each emotionOptions as emotion}
+		{#each data.emotions as emotion}
 			<input
-				id="emotions-{emotion.value}"
-				value={emotion.value}
+				id="emotions-{emotion.ang}"
+				value={emotion.ang}
 				type="checkbox"
 				name="checkbox"
 				bind:group={selectedEmotions}
@@ -90,7 +80,7 @@
 				for="emotions-{emotion.value}"
 				class="bg-pistachio-900 cursor-pointer rounded-xl px-6 py-2 shadow-md"
 			>
-				{emotion.name}
+				{emotion.pl}
 			</label>
 		{/each}
 	</div>
