@@ -49,7 +49,7 @@ export function nextImage(
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
 	}
-
+	console.log(selectedEmotion);
 	results_res.push({
 		resultId: -1,
 		sessionId: -1,
@@ -69,15 +69,16 @@ export async function endTest(
 ) {
 	trainingSession['endedAt'] = new Date();
 	const sessionId = await DocInc(db, 'sessionId');
+	console.log(sessionId);
 	trainingSession['sessionId'] = sessionId;
 	await addDoc(collection(db, 'training_session'), trainingSession);
 	results = results.map((item) => {
 		return { ...item, sessionId: sessionId };
 	});
-	results.forEach(async (result) => {
-		console.log(result);
+	for (let i = 0; i < results.length; i++) {
 		const resultId = await DocInc(db, 'resultId');
-		result['resultId'] = resultId;
-		await addDoc(collection(db, 'training_session_result'), result);
-	});
+		console.log(resultId);
+		results[i]['resultId'] = resultId;
+		await addDoc(collection(db, 'training_session_result'), results[i]);
+	}
 }

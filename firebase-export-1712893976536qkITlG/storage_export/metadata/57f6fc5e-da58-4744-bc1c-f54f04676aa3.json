@@ -1,0 +1,19 @@
+{
+  "name": "1712893889720happy8.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1712893889916,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "8524ee20-a334-4e44-9e05-415df6f41eba"
+  ],
+  "etag": "//wbtq/59Fk7qQkriwQFTgzvzzE",
+  "customMetadata": {},
+  "timeCreated": "2024-04-12T03:51:29.916Z",
+  "updated": "2024-04-12T03:51:29.916Z",
+  "size": 685604,
+  "md5Hash": "wOwZTZAyKRXRDA5fAkQXmw==",
+  "crc32c": "4233586852"
+}
