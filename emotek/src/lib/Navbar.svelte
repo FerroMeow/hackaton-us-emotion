@@ -4,7 +4,7 @@
 	export let navLinks: NavLink[];
 </script>
 
-<nav class="sticky top-0 bg-white p-4">
+<nav class="bg-pistachio-500 sticky top-0 p-4">
 	<div class="container mx-auto flex">
 		<h1 class="text-2xl">
 			<a href="/">Emotek.pl</a>

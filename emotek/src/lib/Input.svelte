@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div>
+<div class="my-2">
 	<p>
 		<label for={id}><slot /></label>
 	</p>

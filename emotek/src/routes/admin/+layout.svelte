@@ -24,6 +24,29 @@
 </script>
 
 {#if authenticated}
-	<Navbar navLinks={adminLinks}></Navbar>
-	<slot />
+	<div class="grid min-h-screen grid-rows-[auto_1fr]">
+		<Navbar
+			navLinks={adminLinks.map((link) => {
+				return { ...link, link: `/admin/${link.link}` };
+			})}
+		></Navbar>
+
+		<div class="grid grid-cols-[auto_1fr]">
+			<nav class="bg-pistachio-700 divide-pomp_and_power-300 divide-y-2 divide-solid px-6 py-4">
+				<h3 class="text-lg">Panel Administracyjny</h3>
+				<ul class="divide-pomp_and_power-300 divide-y-2 divide-solid">
+					{#each adminLinks as sideLink}
+						<li>
+							<a href="/admin/{sideLink.link}" class="text-pomp_and_power-300 text-xl"
+								>{sideLink.name}</a
+							>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+			<div class="p-12">
+				<slot />
+			</div>
+		</div>
+	</div>
 {/if}

@@ -19,7 +19,7 @@
 
 <div>
 	<p>
-		<label for={id}> </label>
+		<label for={id}><slot /></label>
 	</p>
 	<p>
 		<select
