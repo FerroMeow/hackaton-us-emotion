@@ -11,16 +11,20 @@
 
 	onMount(async () => {
 		const user = await getLoggedUser(data.auth);
-		emotekLinksVar.push(
+		emotekLinksVar = emotekLinks.concat(
 			user
-				? {
-						link: '/user/',
-						name: 'Profil'
-					}
-				: {
-						link: '/login/',
-						name: 'Zaloguj się'
-					}
+				? [
+						{
+							link: '/logout/',
+							name: 'Wyloguj się 🥶'
+						}
+					]
+				: [
+						{
+							link: '/login/',
+							name: 'Zaloguj się 😍'
+						}
+					]
 		);
 		emotekLinksVar = emotekLinksVar;
 	});
@@ -28,7 +32,7 @@
 
 <div class="grid min-h-[100vh] grid-rows-[auto_1fr]">
 	<Navbar navLinks={emotekLinksVar}></Navbar>
-	<div>
+	<div class="bg-ecru-500">
 		<slot />
 	</div>
 </div>

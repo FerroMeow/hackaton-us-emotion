@@ -36,22 +36,18 @@
 </script>
 
 {#if authenticated}
-	<div class="grid min-h-full grid-cols-[auto_1fr]">
-		<nav class="bg-pistachio-700 divide-pomp_and_power-300 divide-y-2 divide-solid px-6 py-4">
-			<h3 class="text-lg">Panel Administracyjny</h3>
-			<ul class="divide-pomp_and_power-300 divide-y-2 divide-solid">
+	<div class="grid min-h-full grid-rows-[auto_1fr]">
+		<nav class="bg-glaucous-700 divide-pomp_and_power-300 px-6 py-4">
+			<ul class="divide-pink_lavender-300 container mx-auto flex gap-4">
 				{#each testLinks as sideLink}
 					<li>
-						<a href="/admin/{sideLink.link}" class="text-pomp_and_power-300 text-xl"
-							>{sideLink.name}</a
-						>
+						<a href={sideLink.link} class="text-pomp_and_power-300 text-2xl">{sideLink.name}</a>
 					</li>
 				{/each}
 			</ul>
 		</nav>
-		<div class="p-12">
+		<div class="bg-pink_lavender-800">
 			<slot />
 		</div>
 	</div>
-	<slot />
 {/if}

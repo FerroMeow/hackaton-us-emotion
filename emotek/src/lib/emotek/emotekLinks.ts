@@ -3,14 +3,14 @@ import type { NavLink } from '$lib/types/NavLink';
 export const emotekLinks: NavLink[] = [
 	{
 		link: '/test/',
-		name: 'Test'
+		name: 'Test 🧐'
 	},
 	{
 		link: '/emocje/',
-		name: 'O emocjach'
+		name: 'O emocjach 😳'
 	},
 	{
 		link: '/blog/',
-		name: 'Blog'
+		name: 'Blog 🤓'
 	}
 ];

@@ -89,10 +89,6 @@
 		goto(idToken.claims?.role === 'admin' ? '/admin/' : '/', {
 			replaceState: true
 		});
-
-		goto('/', {
-			replaceState: true
-		});
 	}
 	async function login() {
 		const credentials = await signInWithEmailAndPassword(auth, login_mail, login_pass);
@@ -101,50 +97,53 @@
 			replaceState: true
 		});
 	}
-	function logout() {
-		signOut(auth);
-	}
 </script>
 
-<div>
-	<div class="container mx-auto">
-		<h1>Logowanie do emotek</h1>
+<div class="grid min-h-full grid-rows-[auto_1fr] py-16">
+	<div>
+		<div class="container mx-auto">
+			<h1 class="pb-8 text-4xl">Logowanie do Emotek.pl</h1>
+		</div>
 	</div>
-</div>
-<div>
-	<div class="container mx-auto">
-		<div class="my-8 h-[1px] bg-gray-900"></div>
-		<h2 class="text-2xl">Zarejestruj się</h2>
-		<form
-			id="register"
-			class="grid grid-cols-2 gap-4"
-			on:submit|preventDefault|stopPropagation={() => {}}
-		>
-			<Input id="mail" bind:value={user_email} required>Adres email</Input>
-			<Input id="password" bind:value={user_password} required type="password">Hasło</Input>
-			<Input id="number" type="number" bind:value={currentUserModel.birthYear} required>
-				Data urodzenia
-			</Input>
-			<Select id="sex" options={sexOptions} bind:value={currentUserModel.sex} />
-			<Select id="por" options={residenceOptions} bind:value={currentUserModel.placeOfResidence} />
-			<p>
-				<Button on:click={register} id="register_button">Zarejestruj się</Button>
-			</p>
-		</form>
-		<div class="my-8 h-[1px] bg-gray-900"></div>
-		<h2 class="text-2xl">Zaloguj się</h2>
+	<div class="container mx-auto flex min-h-full justify-between gap-16">
+		<div>
+			<h2 class="text-3xl">Zarejestruj się</h2>
+			<form
+				id="register"
+				class="grid grid-cols-2 items-center gap-4"
+				on:submit|preventDefault|stopPropagation={() => {}}
+			>
+				<Input id="mail" bind:value={user_email} required>Adres email</Input>
+				<Input id="password" bind:value={user_password} required type="password">Hasło</Input>
+				<Input id="number" type="number" bind:value={currentUserModel.birthYear} required>
+					Data urodzenia
+				</Input>
+				<Select id="sex" options={sexOptions} bind:value={currentUserModel.sex} />
+				<Select
+					id="por"
+					options={residenceOptions}
+					bind:value={currentUserModel.placeOfResidence}
+				/>
+				<p>
+					<Button on:click={register} id="register_button">Zarejestruj się</Button>
+				</p>
+			</form>
+		</div>
+		<div class="bg-pomp_and_power-300 w-1"></div>
+		<div>
+			<h2 class="text-3xl">Zaloguj się</h2>
 
-		<form
-			id="login"
-			class="grid grid-cols-2 gap-4"
-			on:submit|preventDefault|stopPropagation={() => {}}
-		>
-			<Input id="maill" type="email" bind:value={login_mail} required>Adres email</Input>
-			<Input id="passwordl" type="password" bind:value={login_pass} required>Hasło</Input>
-			<Button on:click={login}>Zaloguj się</Button>
-		</form>
-		<p>
-			<Button on:click={logout}>Wyloguj</Button>
-		</p>
+			<form
+				id="login"
+				class="grid grid-cols-2 gap-4"
+				on:submit|preventDefault|stopPropagation={() => {}}
+			>
+				<Input id="maill" type="email" bind:value={login_mail} required>Adres email</Input>
+				<Input id="passwordl" type="password" bind:value={login_pass} required>Hasło</Input>
+				<div>
+					<Button on:click={login}>Zaloguj się</Button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
