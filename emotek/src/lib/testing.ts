@@ -40,11 +40,12 @@ export function nextImage(
 	selectedEmotion: string[]
 ) {
 	const image_res = images_res.pop();
-	if (images_res) {
+	if (!image_res) {
+		results_res[results_res.length - 1]['endedAt'] = new Date();
+		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
 		return { image_res, images_res, results_res };
 	}
 	if (results_res.length > 0) {
-		results_res[results_res.length - 1]['resourceId'] = image_res['resourceId'];
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
 	}
@@ -52,7 +53,7 @@ export function nextImage(
 	results_res.push({
 		resultId: -1,
 		sessionId: -1,
-		resourceId: -1,
+		resourceId: image_res['resourceId'],
 		startedAt: new Date(),
 		endedAt: new Date(),
 		recognizedEmotions: []
@@ -74,6 +75,7 @@ export async function endTest(
 		return { ...item, sessionId: sessionId };
 	});
 	results.forEach(async (result) => {
+		console.log(result);
 		const resultId = await DocInc(db, 'resultId');
 		result['resultId'] = resultId;
 		await addDoc(collection(db, 'training_session_result'), result);

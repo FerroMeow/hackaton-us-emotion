@@ -16,6 +16,7 @@
 
 	async function next() {
 		//TODO test if working
+
 		let { image_res, images_res, results_res } = nextImage(images, results, selectedEmotion);
 		image = image_res;
 		images = images_res;
@@ -42,9 +43,6 @@
 	});
 </script>
 
-<a href="diagnoza"> Diagnozuj</a> <br />
-<a href="cwiczenia"> Ćwicz</a>
-
 <div>
 	<h2>Ćwicz rozpoznawanie emocji</h2>
 	<div>
@@ -66,5 +64,3 @@
 		<div id="result" style="display:none;"></div>
 	</div>
 </div>
-
-<a href="mojecwiczenia"> Własny test</a> <br />
