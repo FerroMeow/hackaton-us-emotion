@@ -30,8 +30,8 @@
 			}
 			const name = Date.now() + file.name;
 			const img_ref = ref(storage, name);
-			uploadBytes(img_ref, file).then((snapshot) => {
-				getDownloadURL(img_ref).then(async (url) => {
+			await uploadBytes(img_ref, file).then(async (snapshot) => {
+				await getDownloadURL(img_ref).then(async (url) => {
 					console.log(url);
 					resource = {
 						resourceId: 1,

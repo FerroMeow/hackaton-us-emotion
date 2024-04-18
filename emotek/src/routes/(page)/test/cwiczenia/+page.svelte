@@ -16,8 +16,14 @@
 	let image: any;
 	let image_per_emotion = 3;
 	let last_emotion: string[] = [];
-
-	async function next() {
+	let ended = false;
+	async function next(first = false) {
+		if (selectedEmotion.length == 0 && !first) {
+			return;
+		}
+		if (ended) {
+			return;
+		}
 		//TODO test if working
 		let { image_res, images_res, results_res, last_emotion_res } = nextImage(
 			images,
@@ -29,7 +35,9 @@
 		images = images_res;
 		results = results_res;
 		last_emotion = last_emotion_res;
+		selectedEmotion = [];
 		if (!image) {
+			ended = true;
 			await endTest(db, trainingSession, results);
 		}
 	}
@@ -46,51 +54,59 @@
 			trainingSession = trainingSession_res;
 			images = images_res;
 
-			await next();
+			await next(true);
 		}
 	});
 </script>
 
-<div in:fade out:fade>
+<div>
 	<div class="container mx-auto">
 		<h2 class="pt-16 text-4xl">Ćwicz rozpoznawanie emocji</h2>
 		<p class="mt-4 text-xl">
 			Dzięki temu ćwiczeniu możesz trenować swoje rozpoznawanie emocji. Powodzenia!
 		</p>
 		<p class="mt-4 text-xl">Zaznacz poprawną emocję, i gdy jesteś pewien kliknij "Następny"</p>
-		<div class="mt-16 grid grid-cols-2">
-			<div class="self-center justify-self-center">
-				<p class="text-2xl">Wybierz emocję:</p>
-				<p id="emotionSelector" class="mx-auto p-8">
-					{#each emotions as emotion}
-						<span class="mx-4 inline-block">
-							<label for="emotion-{emotion.eng}" class="text-xl">{emotion.pl}</label>
-							<input
-								id="emotion-{emotion.eng}"
-								type="checkbox"
-								value={emotion.eng}
-								bind:group={selectedEmotion}
-							/>
-						</span>
-					{/each}
-				</p>
-				<p>
-					<Button on:click={next}>Następne</Button>
-				</p>
-			</div>
-			<div>
-				<div class="h-[50%] w-[50%]">
-					<img
-						id="image"
-						src={image ? image.URL : ''}
-						alt="Zdjęcie do zdiagnozowania emocji"
-						class="h-96 object-cover"
-						style="object-fit: cover;"
-					/>
+		{#if !ended}
+			<div class="mt-16 grid grid-cols-2">
+				<div class="self-center justify-self-center">
+					<p class="text-2xl">Wybierz emocję:</p>
+					<p id="emotionSelector" class="mx-auto p-8">
+						{#each emotions as emotion}
+							<span class="mx-4 inline-block">
+								<label for="emotion-{emotion.eng}" class="text-xl">{emotion.pl}</label>
+								<input
+									id="emotion-{emotion.eng}"
+									type="checkbox"
+									value={emotion.eng}
+									bind:group={selectedEmotion}
+								/>
+							</span>
+						{/each}
+					</p>
+					<p>
+						<Button
+							on:click={() => {
+								next(false);
+							}}>Następne</Button
+						>
+					</p>
+				</div>
+				<div>
+					<div class="h-[50%] w-[50%]">
+						<img
+							id="image"
+							src={image ? image.URL : ''}
+							alt="Zdjęcie do zdiagnozowania emocji"
+							class="h-96 object-cover"
+							style="object-fit: cover;"
+						/>
+						<div id="result" style="display:none;"></div>
+					</div>
 					<div id="result" style="display:none;"></div>
 				</div>
-				<div id="result" style="display:none;"></div>
 			</div>
-		</div>
+		{:else}
+			<p>Zapisywanie wyniku...</p>
+		{/if}
 	</div>
 </div>

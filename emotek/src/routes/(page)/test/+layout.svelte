@@ -37,7 +37,7 @@
 </script>
 
 {#if authenticated}
-	<div class="grid min-h-full grid-rows-[auto_1fr]" in:fade out:fade>
+	<div class="grid min-h-full grid-rows-[auto_1fr]">
 		<nav class="bg-glaucous-700 divide-pomp_and_power-300 px-6 py-4">
 			<ul class="divide-pink_lavender-300 container mx-auto flex gap-4">
 				{#each testLinks as sideLink}

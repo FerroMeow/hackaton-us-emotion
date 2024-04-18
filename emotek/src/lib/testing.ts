@@ -15,7 +15,6 @@ export async function startTest(
 ) {
 	if (userData) {
 		const user = await getUserInfo(db, userData);
-		console.log(userData);
 		const startTime = new Date();
 		const trainingSession_res: TrainingSession = {
 			sessionId: 0,
@@ -42,6 +41,9 @@ export function nextImage(
 	last_emotion: string[]
 ) {
 	const image_res = images_res.pop();
+	selectedEmotion = ['surprise', 'fear', 'sadness', 'anger', 'Happiness', 'contempt', 'disgust'];
+	const select = selectedEmotion[Math.floor(Math.random() * selectedEmotion.length)];
+	selectedEmotion = [select];
 	if (!image_res) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
@@ -88,5 +90,7 @@ export async function endTest(
 		results[i]['resultId'] = resultId;
 		await setDoc(doc(db, 'training_session_result', resultId.toString()), results[i]);
 	}
-	goto('/test/wyniki');
+	goto('/test/wyniki', {
+		replaceState: true
+	});
 }

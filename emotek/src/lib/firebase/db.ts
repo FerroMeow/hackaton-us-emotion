@@ -52,10 +52,12 @@ export async function getEmotions(db: Firestore) {
 }
 
 export async function getImages(db: Firestore, emotions: [], count: number) {
-	const results = [];
+	let results = [];
 	for (const emotion of emotions) {
 		results.push(await getEmotionImages(db, emotion, count));
 	}
+	results = results.flat();
+	results.sort(() => 0.5 - Math.random());
 	return results.flat();
 }
 
@@ -73,6 +75,7 @@ export async function getUserInfo(db: Firestore, userId: string) {
 	if (result.exists()) {
 		return result.data();
 	} else {
+		console.log('user not found');
 		return {};
 	}
 }
@@ -81,8 +84,17 @@ export async function getUserResults(db: Firestore, userId: number, emotions: st
 	const col_ref = collection(db, 'training_session');
 	const res_ref = collection(db, 'training_session_result');
 	let results;
-	results = await getDocs(query(col_ref, where('userId', '==', userId), orderBy('type', 'asc')));
+	console.log(userId);
+	results = await getDocs(
+		query(
+			col_ref,
+			where('userId', '==', userId),
+			orderBy('type', 'asc'),
+			orderBy('startedAt', 'desc')
+		)
+	);
 	let res = results.docs.map((result) => result.data());
+	console.log(res);
 	//loop throogh sessions
 	for (let i = 0; i < res.length; i++) {
 		res[i]['results'] = [];

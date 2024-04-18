@@ -1,8 +1,7 @@
 <script>
-	import { fade } from 'svelte/transition';
 </script>
 
-<div in:fade out:fade>
+<div>
 	<div>
 		<div class="container mx-auto [&>p+p]:mt-4">
 			<h1 class="py-8 text-4xl">Testy</h1>

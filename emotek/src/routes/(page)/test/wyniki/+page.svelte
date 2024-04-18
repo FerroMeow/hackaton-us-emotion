@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { getUserResults } from '$lib/firebase/db';
+	import { getUserInfo, getUserResults } from '$lib/firebase/db';
+	import { getLoggedUser } from '$lib/firebase/auth';
 	import type { LayoutData } from '../../$types';
 	import { onMount } from 'svelte';
 	export let data: LayoutData;
-	const { db, emotions } = data;
+	const { db, emotions, auth } = data;
 	let sessions;
 	const options_time = {
 		hour: 'numeric',
@@ -13,22 +14,28 @@
 	const colors = {
 		anger: 'redwood-500',
 		fear: 'pomp_and_power-500',
-		happiness: 'pink_lavender-400',
+		Happiness: 'pink_lavender-400',
 		surprise: 'ecru-400',
 		contempt: 'gray-500',
 		disgust: 'pistachio-500',
 		sadness: 'glaucous-600'
 	};
 	onMount(async () => {
-		sessions = await getUserResults(
-			db,
-			1,
-			emotions.map((el) => el['eng'])
-		);
-		console.log(sessions);
+		const userId = await getLoggedUser(auth);
+		if (userId) {
+			console.log(userId);
+			const user = await getUserInfo(db, userId['uid']);
+			sessions = await getUserResults(
+				db,
+				user['userId'],
+				emotions.map((el) => el['eng'])
+			);
+			console.log(sessions);
+		}
 	});
 </script>
 
+<p>Wyniki twoich testów:</p>
 {#if sessions}
 	<span
 		class="text-redwood-500 text-pistachio-500 text-pink_lavender-400 text-ecru-400 bg-redwood-500 bg-pomp_and_power-500 bg-pink_lavender-400 bg-ecru-400 bg-pistachio-500 bg-'glaucous-600 bg-gray-500"
@@ -57,9 +64,10 @@
 					{@const aaa =
 						session.results[emotion['eng']]['total'] != 0
 							? Math.round(
-									session.results[emotion['eng']]['correct'] /
-										session.results[emotion['eng']]['total']
-								) * 100
+									(session.results[emotion['eng']]['correct'] /
+										session.results[emotion['eng']]['total']) *
+										100
+								)
 							: 0}
 					<p class={'text-' + colors[emotion['eng']] + ' text-center'}>
 						{emotion['pl']}:{aaa}%
@@ -77,4 +85,3 @@
 		{/each}
 	</div>
 {/if}
-<p>Wyniki twojego testu:</p>

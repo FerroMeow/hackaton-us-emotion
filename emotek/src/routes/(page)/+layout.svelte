@@ -35,7 +35,7 @@
 	navigating.subscribe(updateNav);
 </script>
 
-<div in:fade out:fade>
+<div>
 	<div class="grid min-h-[100vh] grid-rows-[auto_1fr]">
 		<Navbar navLinks={emotekLinksVar}></Navbar>
 		<div class="bg-ecru-500">

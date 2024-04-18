@@ -35,7 +35,7 @@
 	<p><a href="/admin/resource/new/" class="text-pomp_and_power-300">Nowy zasób</a></p>
 </aside>
 
-<div class="divide-y divide-neutral-300">
+<div class="flex flex-row flex-wrap divide-y divide-neutral-300">
 	{#await resourceDocsPromise}
 		<p class="text-4xl" in:fade out:fade>Pobieranie zasobów...</p>
 	{:then resourceDocs}

@@ -1,0 +1,19 @@
+{
+  "name": "1713312480719sur4.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1713312480734,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "d9165fb5-aaca-4211-a898-fd3ab2ceb97c"
+  ],
+  "etag": "YbDm2YiC0fEZvD1Np9eVxqVh6hs",
+  "customMetadata": {},
+  "timeCreated": "2024-04-17T00:08:00.734Z",
+  "updated": "2024-04-17T00:08:00.734Z",
+  "size": 141673,
+  "md5Hash": "3NMR2nlGkc1CTxWHNxRqUA==",
+  "crc32c": "2320435555"
+}
