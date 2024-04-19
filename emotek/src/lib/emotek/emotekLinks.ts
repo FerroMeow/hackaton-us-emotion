@@ -2,6 +2,10 @@ import type { NavLink } from '$lib/types/NavLink';
 
 export const emotekLinks: NavLink[] = [
 	{
+		link: '/ai/',
+		name: 'AI ✨'
+	},
+	{
 		link: '/test/wyniki/',
 		name: 'Wyniki 🥇'
 	},

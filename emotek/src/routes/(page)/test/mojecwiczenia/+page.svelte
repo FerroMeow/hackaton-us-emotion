@@ -42,6 +42,9 @@
 		if (selectedEmotion.length == 0 && !first) {
 			return;
 		}
+		if (ended) {
+			return;
+		}
 		//TODO test if working
 		let { image_res, images_res, results_res, last_emotion_res } = nextImage(
 			images,

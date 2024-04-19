@@ -3,7 +3,7 @@ import { getUserInfo, getImages } from './firebase/db';
 import type { TrainingSessionResult } from './types/collections/TrainingSessionResult';
 import type { TrainingSession } from './types/collections/TrainingSession';
 import { DocInc } from './firebase/db';
-import { addDoc, collection, setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, writeBatch } from 'firebase/firestore';
 import { goto } from '$app/navigation';
 
 export async function startTest(
@@ -41,9 +41,9 @@ export function nextImage(
 	last_emotion: string[]
 ) {
 	const image_res = images_res.pop();
-	selectedEmotion = ['surprise', 'fear', 'sadness', 'anger', 'Happiness', 'contempt', 'disgust'];
+	/*selectedEmotion = ['surprise', 'fear', 'sadness', 'anger', 'Happiness', 'contempt', 'disgust'];
 	const select = selectedEmotion[Math.floor(Math.random() * selectedEmotion.length)];
-	selectedEmotion = [select];
+	selectedEmotion = [select];*/
 	if (!image_res) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;
@@ -80,7 +80,8 @@ export async function endTest(
 	const sessionId = await DocInc(db, 'sessionId');
 	console.log(sessionId);
 	trainingSession['sessionId'] = sessionId;
-	await setDoc(doc(db, 'training_session', sessionId.toString()), trainingSession);
+	const batch = writeBatch(db);
+	batch.set(doc(db, 'training_session', sessionId.toString()), trainingSession);
 	results = results.map((item) => {
 		return { ...item, sessionId: sessionId };
 	});
@@ -88,8 +89,9 @@ export async function endTest(
 		const resultId = await DocInc(db, 'resultId');
 		console.log(resultId);
 		results[i]['resultId'] = resultId;
-		await setDoc(doc(db, 'training_session_result', resultId.toString()), results[i]);
+		batch.set(doc(db, 'training_session_result', resultId.toString()), results[i]);
 	}
+	await batch.commit();
 	goto('/test/wyniki', {
 		replaceState: true
 	});

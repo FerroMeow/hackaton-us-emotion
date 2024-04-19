@@ -1,1 +1,6 @@
 firebase_functions~=0.1.0
+opencv-python
+tensorflow==2.16.1
+keras==3.0.0
+numpy
+pillow
