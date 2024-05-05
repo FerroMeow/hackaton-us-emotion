@@ -1,0 +1,19 @@
+{
+  "name": "1713608122893sur7.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1713608122907,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "2006b690-e649-4876-ab9b-e8abd425ff88"
+  ],
+  "etag": "T6+GtZ9T4yPklu/17BdAvzI6Qk4",
+  "customMetadata": {},
+  "timeCreated": "2024-04-20T10:15:22.907Z",
+  "updated": "2024-04-20T10:15:22.907Z",
+  "size": 325730,
+  "md5Hash": "gORs3VUK0n+gt2XJeKmKcg==",
+  "crc32c": "2410553501"
+}

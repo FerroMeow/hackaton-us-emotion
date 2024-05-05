@@ -2,10 +2,6 @@ import type { NavLink } from '$lib/types/NavLink';
 
 export const adminLinks: NavLink[] = [
 	{
-		link: '/ai/',
-		name: 'AI ✨'
-	},
-	{
 		link: '',
 		name: 'Panel Administracyjny'
 	},
@@ -16,5 +12,9 @@ export const adminLinks: NavLink[] = [
 	{
 		link: 'post/',
 		name: 'Posty'
+	},
+	{
+		link: 'emotion/',
+		name: 'Emocje'
 	}
 ];

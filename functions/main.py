@@ -8,10 +8,8 @@ from cv2 import imread, cvtColor, CascadeClassifier, COLOR_BGR2GRAY, rectangle, 
 from keras import config, models, preprocessing
 from numpy import expand_dims
 from os import remove
-# initialize_app()
-#
-#
 
+#App init
 cred = credentials.Certificate("test-85b39-firebase-adminsdk-5641d-b22f416523.json")
 initialize_app(cred, {'storageBucket':'storageBucket'})
 bucket = storage.bucket()
@@ -45,7 +43,7 @@ def on_request_example(req: https_fn.Request) -> https_fn.Response:
         model = models.load_model('my_model.keras')
         for(col,row,width,height) in detection:
             rectangle(image_detected,(col,row),(col+width,row+height),colors[i%len(colors)],2)
-            i+=1
+           
             cropped = image[row:(row+height),col:(col+width)]
             imwrite('cropped'+str(i)+file_name,cropped)
             im = preprocessing.image.load_img('cropped'+str(i)+file_name,target_size=(48,48),color_mode='grayscale')
@@ -58,6 +56,7 @@ def on_request_example(req: https_fn.Request) -> https_fn.Response:
             predictions[i]['color'] = colors[i%len(colors)]
             predictions[i]['result']={labels[j]:str(pred[0][j]) for j in range(len(labels))}
             remove('cropped'+str(i)+file_name)
+            i+=1
         imwrite("detected_"+file_name,image_detected)
         blob_detected = bucket.blob("tmp/detected_"+file_name)
         blob_detected.upload_from_filename("detected_"+file_name)

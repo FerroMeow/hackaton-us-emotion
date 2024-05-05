@@ -1,0 +1,19 @@
+{
+  "name": "1713608091952cont5.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1713608091970,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "2aab6d3c-84d2-4463-b20c-2700046eae25"
+  ],
+  "etag": "WHqjcI53O++dUlmJ7iQ0XMB/21I",
+  "customMetadata": {},
+  "timeCreated": "2024-04-20T10:14:51.970Z",
+  "updated": "2024-04-20T10:14:51.970Z",
+  "size": 208253,
+  "md5Hash": "4wIfx7GrHDzwLpXMcyCuXA==",
+  "crc32c": "3804841915"
+}

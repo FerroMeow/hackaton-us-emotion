@@ -68,20 +68,20 @@
 						<div
 							style="border-top:5px solid black; margin-top:1%"
 							style:border-top-color={'rgb(' +
-								prediction['color'][0] +
+								prediction['color'][2] +
 								',' +
 								prediction['color'][1] +
 								',' +
-								prediction['color'][2] +
+								prediction['color'][0] +
 								')'}
 						>
 							<p
 								style:color={'rgb(' +
-									prediction['color'][0] +
+									prediction['color'][2] +
 									',' +
 									prediction['color'][1] +
 									',' +
-									prediction['color'][2] +
+									prediction['color'][0] +
 									')'}
 							>
 								Osoba numer {index}

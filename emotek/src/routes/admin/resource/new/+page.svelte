@@ -31,21 +31,18 @@
 			const name = Date.now() + file.name;
 			const img_ref = ref(storage, name);
 			await uploadBytes(img_ref, file).then(async (snapshot) => {
-				await getDownloadURL(img_ref).then(async (url) => {
-					console.log(url);
-					resource = {
-						resourceId: 1,
-						type: 'image',
-						sex: sex,
-						age: age,
-						imageCategory: category,
-						emotions: selectedEmotions,
-						URL: url
-					} satisfies Resource;
-					await setDocInc(doc(db, 'resource', name), resource, 'resourceId');
-					goto('/admin/resource', {
-						replaceState: true
-					});
+				resource = {
+					resourceId: 1,
+					type: 'image',
+					sex: sex,
+					age: age,
+					imageCategory: category,
+					emotions: selectedEmotions,
+					path: img_ref.fullPath
+				};
+				await setDocInc(doc(db, 'resource', name), resource, 'resourceId');
+				goto('/admin/resource', {
+					replaceState: true
 				});
 			});
 		}

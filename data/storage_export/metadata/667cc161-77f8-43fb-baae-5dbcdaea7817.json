@@ -1,0 +1,19 @@
+{
+  "name": "1713608115160society.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1713608115171,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "327d40c1-3cea-4449-8f8d-a71a75843565"
+  ],
+  "etag": "yT2Wts7g1UqE8CsImxfLoTtko7s",
+  "customMetadata": {},
+  "timeCreated": "2024-04-20T10:15:15.171Z",
+  "updated": "2024-04-20T10:15:15.171Z",
+  "size": 249247,
+  "md5Hash": "DItW7lf5frrUdzIwWCahIQ==",
+  "crc32c": "1383322651"
+}

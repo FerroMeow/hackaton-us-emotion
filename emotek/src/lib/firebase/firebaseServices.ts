@@ -8,13 +8,13 @@ import firebaseConfig from '$lib/env';
 export const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+connectAuthEmulator(auth, 'http://192.168.0.106:9099');
 
 export const storage = getStorage();
-connectStorageEmulator(storage, '127.0.0.1', 9199);
+connectStorageEmulator(storage, '192.168.0.106', 9199);
 //for some reason can't be declared after db?
 export const functions = getFunctions(app);
-connectFunctionsEmulator(functions, '127.0.0.1', 5001);
+connectFunctionsEmulator(functions, '192.168.0.106', 5001);
 
 export const db = getFirestore(app);
-connectFirestoreEmulator(db, '127.0.0.1', 8080);
+connectFirestoreEmulator(db, '192.168.0.106', 8080);

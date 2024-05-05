@@ -46,7 +46,7 @@
 			return;
 		}
 		//TODO test if working
-		let { image_res, images_res, results_res, last_emotion_res } = nextImage(
+		let { image_res, images_res, results_res, last_emotion_res } = await nextImage(
 			images,
 			results,
 			selectedEmotion,

@@ -4,7 +4,10 @@ import type { TrainingSessionResult } from './types/collections/TrainingSessionR
 import type { TrainingSession } from './types/collections/TrainingSession';
 import { DocInc } from './firebase/db';
 import { setDoc, doc, writeBatch } from 'firebase/firestore';
+import { ref } from 'firebase/storage';
 import { goto } from '$app/navigation';
+import { getDownloadURL } from 'firebase/storage';
+import { storage } from './firebase/firebaseServices';
 
 export async function startTest(
 	type: string,
@@ -34,13 +37,14 @@ export async function startTest(
 	return {};
 }
 
-export function nextImage(
+export async function nextImage(
 	images_res: any[],
 	results_res: TrainingSessionResult[],
 	selectedEmotion: string[],
 	last_emotion: string[]
 ) {
 	const image_res = images_res.pop();
+
 	/*selectedEmotion = ['surprise', 'fear', 'sadness', 'anger', 'Happiness', 'contempt', 'disgust'];
 	const select = selectedEmotion[Math.floor(Math.random() * selectedEmotion.length)];
 	selectedEmotion = [select];*/
@@ -50,6 +54,7 @@ export function nextImage(
 		results_res[results_res.length - 1]['answer'] = last_emotion;
 		return { image_res, images_res, results_res };
 	}
+	image_res.URL = await getDownloadURL(ref(storage, image_res['path']));	
 	if (results_res.length > 0) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;

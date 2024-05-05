@@ -22,5 +22,5 @@ export type Resource =
 			sex?: Sex;
 			imageCategory: ImageCategory;
 			emotions: Emotion[];
-			URL: string;
+			path: string;
 	  };
