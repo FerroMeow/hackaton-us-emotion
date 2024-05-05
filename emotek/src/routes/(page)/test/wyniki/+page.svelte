@@ -69,15 +69,13 @@
 										100
 								)
 							: 0}
-					<p class={'text-' + colors[emotion['eng']] + ' text-center'}>
+					<p class={' text-center'} style="color:{emotion.color}">
 						{emotion['pl']}:{aaa}%
 					</p>
 					<div class="mx-auto h-2 w-[100%] bg-gray-300">
 						<div
-							class={'bg-' +
-								colors[emotion['eng']] +
-								' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
-							style:width={`${aaa}%`}
+							class={' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
+							style="width:{aaa}%; background-color:{emotion.color}"
 						></div>
 					</div>
 				{/each}

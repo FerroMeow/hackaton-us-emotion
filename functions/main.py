@@ -37,7 +37,7 @@ def on_request_example(req: https_fn.Request) -> https_fn.Response:
             (255,0,255),
         ]
         i=0
-        labels = ["anger","disgust","fear","Happiness","contempt","sadness","surprise"]
+        labels = ["Anger","Disgust","Fear","Happiness","Contempt","Sadness","Surprise"]
         predictions = {}
         config.disable_traceback_filtering()
         model = models.load_model('my_model.keras')

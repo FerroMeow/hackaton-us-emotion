@@ -8,15 +8,6 @@
 	let src = '';
 	let state = 'not_started';
 	let predictions = [];
-	const colors = {
-		anger: 'redwood-500',
-		fear: 'pomp_and_power-500',
-		Happiness: 'pink_lavender-400',
-		surprise: 'ecru-400',
-		contempt: 'gray-500',
-		disgust: 'pistachio-500',
-		sadness: 'glaucous-600'
-	};
 
 	async function upload() {
 		if (files.length > 0) {
@@ -88,14 +79,13 @@
 							</p>
 							{#each emotions as emotion}
 								{@const aaa = Math.round(parseFloat(prediction['result'][emotion['eng']]) * 100)}
-								<p class={'text-' + colors[emotion['eng']]}>
+								<p style="color:{emotion.color}">
 									{emotion['pl']}:{aaa}%
 								</p>
 								<div class="mx-auto h-2 w-[100%] bg-gray-300">
 									<div
-										class={'bg-' +
-											colors[emotion['eng']] +
-											' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
+										class={' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
+										style="background-color:{emotion.color}"
 										style:width={`${aaa}%`}
 									></div>
 								</div>
