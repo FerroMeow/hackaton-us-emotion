@@ -32,6 +32,7 @@ export async function startTest(
 		await getImages(db, emotions, count).then((res) => {
 			images_res = res;
 		});
+		console.log(count);
 		return { trainingSession_res, images_res };
 	}
 	return {};
@@ -54,7 +55,7 @@ export async function nextImage(
 		results_res[results_res.length - 1]['answer'] = last_emotion;
 		return { image_res, images_res, results_res };
 	}
-	image_res.URL = await getDownloadURL(ref(storage, image_res['path']));	
+	image_res.URL = await getDownloadURL(ref(storage, image_res['path']));
 	if (results_res.length > 0) {
 		results_res[results_res.length - 1]['endedAt'] = new Date();
 		results_res[results_res.length - 1]['recognizedEmotions'] = selectedEmotion;

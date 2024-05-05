@@ -20,6 +20,7 @@
 
 	onMount(async () => {
 		const user = await getLoggedUser(auth);
+		console.log(user);
 		if (user === null) {
 			goto('/login/', {
 				replaceState: true

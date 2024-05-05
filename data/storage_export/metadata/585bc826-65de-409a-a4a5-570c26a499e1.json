@@ -1,0 +1,19 @@
+{
+  "name": "1714938749776angry3.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1714938749789,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "b0111d0a-2bef-4dc3-aa87-278f5e684e9f"
+  ],
+  "etag": "ETWmT6a0SHoqdlDCUAKHxMl1Wz8",
+  "customMetadata": {},
+  "timeCreated": "2024-05-05T19:52:29.789Z",
+  "updated": "2024-05-05T19:52:29.789Z",
+  "size": 94228,
+  "md5Hash": "jnn0ZKPtp8mVWUYS8TIydw==",
+  "crc32c": "941539309"
+}

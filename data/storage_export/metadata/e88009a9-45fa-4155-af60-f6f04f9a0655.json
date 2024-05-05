@@ -1,0 +1,19 @@
+{
+  "name": "1714938718809scared4.jpg",
+  "bucket": "storageBucket",
+  "metageneration": 1,
+  "generation": 1714938718819,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "a1af3282-673d-4fd4-8628-10ee113fe61b"
+  ],
+  "etag": "EAbwCwOISEtnaSUzBCDJXw991w8",
+  "customMetadata": {},
+  "timeCreated": "2024-05-05T19:51:58.819Z",
+  "updated": "2024-05-05T19:51:58.819Z",
+  "size": 138439,
+  "md5Hash": "52SAvfxXSE98xgHbbzTuVQ==",
+  "crc32c": "2979946588"
+}
