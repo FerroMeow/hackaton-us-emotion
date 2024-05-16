@@ -105,15 +105,19 @@
 						<p class="text-2xl">Wybierz emocję:</p>
 						<p id="emotionSelector" class="mx-auto p-8">
 							{#each emotions as emotion}
-								<span class="mx-4 inline-block">
-									<label for="emotion-{emotion.eng}" class="text-xl">{emotion.pl}</label>
+								<div
+									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl"
+								>
+									<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
+										>{emotion.emoji}{emotion.pl}</label
+									>
 									<input
 										id="emotion-{emotion.eng}"
 										type="checkbox"
 										value={emotion.eng}
 										bind:group={selectedEmotion}
 									/>
-								</span>
+								</div>
 							{/each}
 						</p>
 						<p>

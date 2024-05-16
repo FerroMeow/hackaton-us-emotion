@@ -6,6 +6,7 @@
 	import { getLoggedUser } from '$lib/firebase/auth';
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
+	import { getIdTokenResult } from 'firebase/auth';
 
 	export let data: LayoutData;
 	const { auth } = data;
@@ -20,12 +21,20 @@
 
 	onMount(async () => {
 		const user = await getLoggedUser(auth);
+
 		console.log(user);
 		if (user === null) {
 			goto('/login/', {
 				replaceState: true
 			});
 		} else {
+			user.getIdTokenResult().then((result) => {
+				if (result.claims.role != 'admin') {
+					goto('/', {
+						replaceState: true
+					});
+				}
+			});
 			adminLinksParsedVar = adminLinksParsed.concat([
 				{
 					link: '/logout/',

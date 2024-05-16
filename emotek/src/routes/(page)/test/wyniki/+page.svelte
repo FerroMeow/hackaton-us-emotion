@@ -61,23 +61,26 @@
 					</div>
 				</div>
 				{#each emotions as emotion}
-					{@const aaa =
-						session.results[emotion['eng']]['total'] != 0
-							? Math.round(
-									(session.results[emotion['eng']]['correct'] /
-										session.results[emotion['eng']]['total']) *
-										100
-								)
-							: 0}
-					<p class={' text-center'} style="color:{emotion.color}">
-						{emotion['pl']}:{aaa}%
-					</p>
-					<div class="mx-auto h-2 w-[100%] bg-gray-300">
-						<div
-							class={' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
-							style="width:{aaa}%; background-color:{emotion.color}"
-						></div>
-					</div>
+					{#if session.results[emotion['eng']]['total'] > 0}
+						{@const aaa =
+							session.results[emotion['eng']]['total'] != 0
+								? Math.round(
+										(session.results[emotion['eng']]['correct'] /
+											session.results[emotion['eng']]['total']) *
+											100
+									)
+								: 0}
+
+						<p class={' text-center'} style="color:{emotion.color}">
+							{emotion['pl']}:{aaa}%
+						</p>
+						<div class="mx-auto h-2 w-[100%] bg-gray-300">
+							<div
+								class={' flex h-full  flex-col justify-center overflow-hidden whitespace-nowrap'}
+								style="width:{aaa}%; background-color:{emotion.color}"
+							></div>
+						</div>
+					{/if}
 				{/each}
 			</div>
 		{/each}
