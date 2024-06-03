@@ -14,11 +14,15 @@
 5. Navigate to "Emotek-pl" in firebase console, then project settings->Service accounts->Generate new private key. Move the downloaded file to /functions/<br />
 6. Download "my_model.keras" file from our discord and place it in /functions/<br />
 7. Go to /emotek/ and run "npm install" command<br />
-8. Create a build of the app by running "npm run build command"<br />
-9. Navigate to /data/ directory. Create "database_export" directory<br />
-10. Ensure that within the file "emotek/src/lib/firebase/firebaseServices.ts", all the IP addresses are properly set(either your local IP, or 127.0.0.1)<br />
-11. Run "firebase emulators:start --import data" command within root directory of the project<br />
-12. To run dev server run the command "npm run dev"<br />
+8. Create ".env" file inside /emtek/ directory. Navigate to "emotek" app within firebase console and place all the values within it inside the ".env" file in this format:<br />
+  PUBLIC_FIREBASE_API_KEY=A... <br />
+  PUBLIC_FIREBASE_AUTH_DOMAIN=t... <br />
+  ...<br />
+9. Create a build of the app by running "npm run build command"<br />
+10. Navigate to /data/ directory. Create "database_export" directory<br />
+11. Ensure that within the file "emotek/src/lib/firebase/firebaseServices.ts", all the IP addresses are properly set(either your local IP, or 127.0.0.1)<br />
+12. Run "firebase emulators:start --import data" command within root directory of the project<br />
+13. To run dev server run the command "npm run dev"<br />
 
 ## Ports
 - The port of the dev server will be provided in the command line<br />
