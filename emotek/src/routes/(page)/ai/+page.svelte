@@ -2,13 +2,14 @@
 	import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 	import type { LayoutData } from '../../$types';
 	import { httpsCallable } from 'firebase/functions';
+	import Button from '$lib/Button.svelte';
 	export let data: LayoutData;
 	const { emotions, storage, functions } = data;
 	let files: FileList = [];
 	let src = '';
 	let state = 'not_started';
 	let predictions = [];
-
+	let consent = false;
 	async function upload() {
 		if (files.length > 0) {
 			state = 'started';
@@ -33,18 +34,63 @@
 	}
 </script>
 
-<span
-	class="text-redwood-500 text-pistachio-500 text-pink_lavender-400 text-ecru-400 bg-redwood-500 bg-pomp_and_power-500 bg-pink_lavender-400 bg-ecru-400 bg-pistachio-500 bg-'glaucous-600 bg-gray-500"
-></span>
+
 <div>
 	<div style="min-height:80vh; width:80%; margin:auto; margin-top:2%" class="bg-pink_lavender-800">
-		<div style="border:1px solid red; width:100%; height:25%; padding:1%">
+		<div style=" width:100%; height:25%; padding:1%">
 			<h1 class="text-2xl font-bold">Narzędzie wspomagające wykrywanie emocji</h1>
 			<p>
 				Aby skorzystać z naszego narzędzia, wcisnij przycisk poniżej i wybierz zdjęcie na którym
 				nasz system ma wykryć emocje. Po wybraniu zdjęcia proces może chwilę potrwać.
 			</p>
-			<input type="file" id="image" bind:files accept=".jpg, .jpeg, .png" on:change={upload} />
+			<form on:submit|preventDefault|stopPropagation={() => {}}  class="m-10">
+				<p>
+					<label
+				for="image"
+				class="text-pomp_and_power-300 flex h-full w-full cursor-pointer text-xl"
+			>
+				{#if !files.length}
+					<p
+						class="text-pistachio-300  w-full"
+					>
+						<span> Wybierz zdjęcia </span>
+					</p>
+				{:else}
+					{#each files as file}
+						{@const imageUrl = URL.createObjectURL(file)}
+						<div>
+							<img
+								src={imageUrl}
+								on:load|once={() => URL.revokeObjectURL(imageUrl)}
+								alt={file.name}
+								class="w-32 h-32 object-contain bg-white"
+							/>
+						</div>
+					{/each}
+				{/if}
+			</label>
+					<input type="file" id="image" bind:files accept=".jpg, .jpeg, .png"  class="invisible"/>
+				</p>
+				<p class="my-5">
+					<input required type="checkbox" bind:checked={consent} id="consent" />
+					<label for="consent">Zgadzam się na tymczasowe przechowywanie przesłanych zdjęć na serwerach "Emotek.pl"</label>
+				</p>
+				<p>
+					{#if consent}
+					<br />
+					<Button type="submit" on:click={upload}>Wyślij zdjęcie</Button>
+					{:else if !consent}
+					<p style="color: red;">Skorzystanie z usługie wymaga zgody na przechowywanie zdjęcia.</p>
+					<Button type="submit" disabled>Wyślij zdjęcie</Button>
+					{:else if state == 'started'}
+					<Button type="submit" disabled>Wyślij zdjęcie</Button>
+					{/if}
+					
+				</p>
+			</form>
+			
+			
+			
 		</div>
 		{#if state == 'finished'}
 			<div style="border:1px solid blue; width:100%; height:75%; display:flex; flex-direction:row">
@@ -95,7 +141,7 @@
 				</div>
 			</div>
 		{:else if state == 'started'}
-			<h1>Proszę czekać...</h1>
+			<p class="text-center text-xl">Proszę czekać...</p>
 		{/if}
 	</div>
 </div>

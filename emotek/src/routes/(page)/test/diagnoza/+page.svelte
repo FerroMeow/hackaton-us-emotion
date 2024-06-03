@@ -69,46 +69,54 @@
 		</p>
 		<p class="mt-4 text-xl">Zaznacz poprawną emocję, i gdy jesteś pewien kliknij "Następny"</p>
 		{#if !ended}
-			<div class="mt-16 grid grid-cols-2">
-				<div class="self-center justify-self-center">
-					<p class="text-2xl">Wybierz emocję:</p>
-					<p id="emotionSelector" class="mx-auto p-8">
-						{#each emotions as emotion}
-							<div
-								class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl"
-							>
-								<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
-									>{emotion.emoji}{emotion.pl}</label
-								>
-								<input
-									id="emotion-{emotion.eng}"
-									type="checkbox"
-									value={emotion.eng}
-									bind:group={selectedEmotion}
-								/>
-							</div>
-						{/each}
-					</p>
-					<p>
-						<Button
-							on:click={() => {
-								next(false);
-							}}>Następne</Button
-						>
-					</p>
-				</div>
+			<div class="mt-16 grid grid-cols-1">
+				
 				<div>
-					<div class="h-[50%] w-[50%]">
+					<div class="h-[50%] w-[50%] m-auto">
 						<img
 							id="image"
 							src={image ? image.URL : ''}
 							alt="Zdjęcie do zdiagnozowania emocji"
-							class="h-96 object-cover"
+							class="h-96 object-cover m-auto"
 							style="object-fit: cover;"
 						/>
 						<div id="result" style="display:none;"></div>
 					</div>
 					<div id="result" style="display:none;"></div>
+				</div>
+				<div class="self-center justify-self-center">
+						<p id="emotionSelector" class="mx-auto px-8  flex flex-wrap justify-center">
+							{#each emotions as emotion}
+								<div
+									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl basis-1/5"
+								>
+									<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
+										>{emotion.emoji}{emotion.pl}</label
+									>
+									<input
+										id="emotion-{emotion.eng}"
+										type="checkbox"
+										value={emotion.eng}
+										bind:group={selectedEmotion}
+									/>
+								</div>
+							{/each}
+						</p>
+		
+					
+					<p class="justify-center flex gap-16 pb-16">
+						<Button 
+							on:click={() => {
+								next(false);
+							}}>Sprawdź odpowiedź</Button
+						>
+						<Button 
+							on:click={() => {
+								next(false);
+							}}>Następne</Button
+						>
+						
+					</p>
 				</div>
 			</div>
 		{:else}

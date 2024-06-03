@@ -13,7 +13,7 @@
 	<div class="container mx-auto">
 		{#await postPromise then posts}
 			{#if posts.empty}
-				<p class="text-5xl font-thin">Jeszcze nie jesteśmy gotowi mówić o emojach! 🫣</p>
+				<p class="text-5xl font-thin">Jeszcze nie jesteśmy gotowi mówić o emojach! 😓</p>
 				<p class="mt-8">
 					<img src={cat} alt="" />
 				</p>

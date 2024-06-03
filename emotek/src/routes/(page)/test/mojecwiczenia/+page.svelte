@@ -6,6 +6,7 @@
 	import { startTest, nextImage, endTest } from '$lib/testing';
 	import Button from '$lib/Button.svelte';
 	import { fade } from 'svelte/transition';
+	import Input from '$lib/Input.svelte';
 
 	export let data: layoutData;
 	const { emotions, db, auth } = data;
@@ -78,35 +79,45 @@
 						<label for="emotions">Wybierz emocje:</label>
 					</p>
 					<p>
-						<select id="emotions" name="emotions" bind:value={picCategories} multiple>
+						<select id="emotions" name="emotions" bind:value={picCategories} multiple class="bg-ecru-900 accent-ecru-900 rounded-lg px-4 py-2 h-44 shadow-sm no-scrollbar">
 							{#each emotions as emotion}
-								<option value={emotion.eng}>{emotion.pl}</option>
+								<option  value={emotion.eng}>{emotion.pl}</option>
 							{/each}
 						</select>
 					</p>
 				</div>
 				<div class="mt-4">
 					<p>
-						<label for="picture_count">Wybierz ile zdjęć z każdej kategori chcesz wyświetlic</label>
-					</p>
-					<p>
-						<input type="number" bind:value={picCount} min="0" max="10" id="picture_count" />
+						<Input type="number" id="picture_count" bind:value={picCount}>Wybierz ile zdjęć z każdej kategori chcesz wyświetlic</Input>
 					</p>
 				</div>
 				<p>
-					<Button type="submit" class="mt-4" on:click={beginTest}>Rozpocznij swój test</Button>
+					<Button type="submit" on:click={beginTest}>Rozpocznij swój test</Button>
 				</p>
 			</form>
 		{:else}
 			<p class="mt-4 text-xl">Zaznacz poprawną emocję, i gdy jesteś pewien kliknij "Następny"</p>
 			{#if !ended}
-				<div class="mt-16 grid grid-cols-2">
-					<div class="self-center justify-self-center">
-						<p class="text-2xl">Wybierz emocję:</p>
-						<p id="emotionSelector" class="mx-auto p-8">
+			<div class="mt-16 grid grid-cols-1">
+				
+				<div>
+					<div class="h-[50%] w-[50%] m-auto">
+						<img
+							id="image"
+							src={image ? image.URL : ''}
+							alt="Zdjęcie do zdiagnozowania emocji"
+							class="h-96 object-cover m-auto"
+							style="object-fit: cover;"
+						/>
+						<div id="result" style="display:none;"></div>
+					</div>
+					<div id="result" style="display:none;"></div>
+				</div>
+				<div class="self-center justify-self-center">
+						<p id="emotionSelector" class="mx-auto px-8  flex flex-wrap justify-center">
 							{#each emotions as emotion}
 								<div
-									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl"
+									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl basis-1/5"
 								>
 									<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
 										>{emotion.emoji}{emotion.pl}</label
@@ -120,27 +131,23 @@
 								</div>
 							{/each}
 						</p>
-						<p>
-							{#if !ended}
-								<Button
-									on:click={() => {
-										next(false);
-									}}>Następne</Button
-								>
-							{/if}
-						</p>
-					</div>
-					<div class="h-[50%] w-[50%]">
-						<img
-							id="image"
-							src={image ? image.URL : ''}
-							alt="Zdjęcie do zdiagnozowania emocji"
-							class="h-96 object-cover"
-							style="object-fit: cover;"
-						/>
-						<div id="result" style="display:none;"></div>
-					</div>
+		
+					
+					<p class="justify-center flex gap-16 pb-16">
+						<Button 
+							on:click={() => {
+								next(false);
+							}}>Sprawdź odpowiedź</Button
+						>
+						<Button 
+							on:click={() => {
+								next(false);
+							}}>Następne</Button
+						>
+						
+					</p>
 				</div>
+			</div>
 			{:else}
 				<p>Zapisywanie wyniku...</p>
 			{/if}

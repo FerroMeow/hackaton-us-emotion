@@ -35,7 +35,6 @@
 	});
 </script>
 
-<p>Wyniki twoich testów:</p>
 {#if sessions}
 	<span
 		class="text-redwood-500 text-pistachio-500 text-pink_lavender-400 text-ecru-400 bg-redwood-500 bg-pomp_and_power-500 bg-pink_lavender-400 bg-ecru-400 bg-pistachio-500 bg-'glaucous-600 bg-gray-500"
