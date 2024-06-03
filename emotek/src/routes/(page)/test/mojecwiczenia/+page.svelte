@@ -67,7 +67,7 @@
 
 <div>
 	<div class="container mx-auto">
-		<h2 class="pt-16 text-4xl">Ćwicz rozpoznawanie emocji</h2>
+		<h2 class="mt-4 text-4xl">Ćwicz rozpoznawanie emocji</h2>
 		<p class="mt-4 text-xl">
 			To ćwiczenie pozwala Ci wybrać emocje które według ciebie sprawiają ci problem, i ćwiczenie
 			ich.
@@ -79,16 +79,24 @@
 						<label for="emotions">Wybierz emocje:</label>
 					</p>
 					<p>
-						<select id="emotions" name="emotions" bind:value={picCategories} multiple class="bg-ecru-900 accent-ecru-900 rounded-lg px-4 py-2 h-44 shadow-sm no-scrollbar">
+						<select
+							id="emotions"
+							name="emotions"
+							bind:value={picCategories}
+							multiple
+							class="bg-ecru-900 accent-ecru-900 no-scrollbar h-44 rounded-lg px-4 py-2 shadow-sm"
+						>
 							{#each emotions as emotion}
-								<option  value={emotion.eng}>{emotion.pl}</option>
+								<option value={emotion.eng}>{emotion.pl}</option>
 							{/each}
 						</select>
 					</p>
 				</div>
 				<div class="mt-4">
 					<p>
-						<Input type="number" id="picture_count" bind:value={picCount}>Wybierz ile zdjęć z każdej kategori chcesz wyświetlic</Input>
+						<Input type="number" id="picture_count" bind:value={picCount}
+							>Wybierz ile zdjęć z każdej kategori chcesz wyświetlic</Input
+						>
 					</p>
 				</div>
 				<p>
@@ -98,56 +106,54 @@
 		{:else}
 			<p class="mt-4 text-xl">Zaznacz poprawną emocję, i gdy jesteś pewien kliknij "Następny"</p>
 			{#if !ended}
-			<div class="mt-16 grid grid-cols-1">
-				
-				<div>
-					<div class="h-[50%] w-[50%] m-auto">
-						<img
-							id="image"
-							src={image ? image.URL : ''}
-							alt="Zdjęcie do zdiagnozowania emocji"
-							class="h-96 object-cover m-auto"
-							style="object-fit: cover;"
-						/>
+				<div class="mt-8 grid grid-cols-1">
+					<div>
+						<div class="m-auto h-[50%] w-[50%]">
+							<img
+								id="image"
+								src={image ? image.URL : ''}
+								alt="Zdjęcie do zdiagnozowania emocji"
+								class="m-auto h-96 w-96 object-contain"
+							/>
+							<div id="result" style="display:none;"></div>
+						</div>
 						<div id="result" style="display:none;"></div>
 					</div>
-					<div id="result" style="display:none;"></div>
-				</div>
-				<div class="self-center justify-self-center">
-						<p id="emotionSelector" class="mx-auto px-8  flex flex-wrap justify-center">
+					<div class="self-center justify-self-center">
+						<p id="emotionSelector" class="mx-auto flex flex-wrap justify-center px-8">
 							{#each emotions as emotion}
 								<div
-									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl basis-1/5"
+									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block h-12 w-32 basis-1/5 rounded-lg px-4 py-2 text-xl shadow-sm transition-all hover:shadow-xl"
 								>
-									<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
-										>{emotion.emoji}{emotion.pl}</label
-									>
 									<input
 										id="emotion-{emotion.eng}"
 										type="checkbox"
 										value={emotion.eng}
 										bind:group={selectedEmotion}
 									/>
+									<label
+										for="emotion-{emotion.eng}"
+										class=" h-100 w-100 text-xl"
+										style="color:{emotion.color}">{emotion.emoji}{emotion.pl}</label
+									>
 								</div>
 							{/each}
 						</p>
-		
-					
-					<p class="justify-center flex gap-16 pb-16">
-						<Button 
-							on:click={() => {
-								next(false);
-							}}>Sprawdź odpowiedź</Button
-						>
-						<Button 
-							on:click={() => {
-								next(false);
-							}}>Następne</Button
-						>
-						
-					</p>
+
+						<p class="flex justify-center gap-16 pb-16">
+							<Button
+								on:click={() => {
+									next(false);
+								}}>Sprawdź odpowiedź</Button
+							>
+							<Button
+								on:click={() => {
+									next(false);
+								}}>Następne</Button
+							>
+						</p>
+					</div>
 				</div>
-			</div>
 			{:else}
 				<p>Zapisywanie wyniku...</p>
 			{/if}

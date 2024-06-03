@@ -61,59 +61,54 @@
 
 <div>
 	<div class="container mx-auto">
-		<h2 class="pt-16 text-4xl">Ćwicz rozpoznawanie emocji</h2>
+		<h2 class="pt-4 text-4xl">Ćwicz rozpoznawanie emocji</h2>
 		<p class="mt-4 text-xl">
 			Dzięki temu ćwiczeniu możesz trenować swoje rozpoznawanie emocji. Powodzenia!
 		</p>
 		<p class="mt-4 text-xl">Zaznacz poprawną emocję, i gdy jesteś pewien kliknij "Następny"</p>
 		{#if !ended}
-			<div class="mt-16 grid grid-cols-1">
-				
+			<div class="mt-8 grid grid-cols-1">
 				<div>
-					<div class="h-[50%] w-[50%] m-auto">
-						<img
-							id="image"
-							src={image ? image.URL : ''}
-							alt="Zdjęcie do zdiagnozowania emocji"
-							class="h-96 object-cover m-auto"
-							style="object-fit: cover;"
-						/>
-						<div id="result" style="display:none;"></div>
-					</div>
+					<img
+						id="image"
+						src={image ? image.URL : ''}
+						alt="Zdjęcie do zdiagnozowania emocji"
+						class="m-auto h-96 w-96 object-contain"
+					/>
+					<div id="result" style="display:none;"></div>
+
 					<div id="result" style="display:none;"></div>
 				</div>
 				<div class="self-center justify-self-center">
-						<p id="emotionSelector" class="mx-auto px-8  flex flex-wrap justify-center">
-							{#each emotions as emotion}
-								<div
-									class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl basis-1/5"
+					<p id="emotionSelector" class="mx-auto flex flex-wrap justify-center px-8">
+						{#each emotions as emotion}
+							<div
+								class="bg-ecru-700 hover:bg-ecru-600 m-4 inline-block basis-1/5 rounded-lg px-4 py-2 shadow-sm transition-all hover:shadow-xl"
+							>
+								<input
+									id="emotion-{emotion.eng}"
+									type="checkbox"
+									value={emotion.eng}
+									bind:group={selectedEmotion}
+								/>
+								<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
+									>{emotion.emoji}{emotion.pl}</label
 								>
-									<label for="emotion-{emotion.eng}" class=" text-xl" style="color:{emotion.color}"
-										>{emotion.emoji}{emotion.pl}</label
-									>
-									<input
-										id="emotion-{emotion.eng}"
-										type="checkbox"
-										value={emotion.eng}
-										bind:group={selectedEmotion}
-									/>
-								</div>
-							{/each}
-						</p>
-		
-					
-					<p class="justify-center flex gap-16 pb-16">
-						<Button 
+							</div>
+						{/each}
+					</p>
+
+					<p class="flex justify-center gap-16 pb-16">
+						<Button
 							on:click={() => {
 								next(false);
 							}}>Sprawdź odpowiedź</Button
 						>
-						<Button 
+						<Button
 							on:click={() => {
 								next(false);
 							}}>Następne</Button
 						>
-						
 					</p>
 				</div>
 			</div>
